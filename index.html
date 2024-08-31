@@ -1,380 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <title>Wahaj Tahir | Software Engineer |</title>
-    <link rel="icon" type="icon" href="./Logo.png">
-    <style>
-        body {
-            font-family: Poppins, sans-serif;
-            margin: 0;
-            padding: 0;
-          background-color:black;
-          
-        }
-
-        /* Navbar styles */
-        .navbar {
-            background-color: #0F0F0F;
-            overflow: hidden;
-            align-items: center;
-            text-align: center;
-            padding-top: 5px;
-            padding-bottom: 1px;
-            pointer-events: none;
-        }
-
-        .navbar a {
-            float: center;
-            display: block;
-            color: white;
-            /* padding-top: 2px ;
-            padding-bottom: 2px; */
-            text-decoration: none;
-            pointer-events: none;
-        }
-
-        /* Intro section styles */
-        .intro {
-            position: relative;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .intro video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-
-        }
-        
-
-        .intro-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            font-size: 36px;
-        }
-
-        /* About Me section styles */
-        .about {
-            background-color: #005B41;
-            color: white;
-            padding: 50px;
-            object-fit: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: justify;
-            pointer-events: none;
-        }
-
-        /* Profile image styles */
-        .profile-img {
-            
-           border-color: #008080;
-            border-radius: 50%;
-            object-fit: cover;
-            clip-path: circle();
-        }
-      
-            
-        
-        
-
-        /* Tech Stack section styles */
-        .tech-stack {
-            background-color:#0F0F0F;
-            color: white;
-            padding: 50px;
-            align-items: center;
-            text-align: center;
-        
-
-        }
-
-        /* Dialog box styles */
-        .dialog-box {
-            background-color: #0F0F0F;
-            color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .footer {
-            background-color: blueviolet;
-            color: white;
-            text-align: center;
-            padding: 1px;
-            position: absolute;
-            width: 100%;
-            
-            
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px)
-        {
-            .navbar a
-            {
-                float: center;
-                display: block;
-                text-align: center;
+    <link rel="icon" href="./images/MyStack/Logo2.png" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Wahaj Tahir | Software Engineer |" name="description" />
+    <meta content="" name="keywords" />
+    <meta content="" name="author" />
+    <!-- CSS Files
+        ================================================== -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap" />
+        <link href="css/plugins.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/coloring.css" rel="stylesheet" type="text/css" />
+        <style>
+            :root {
+                --primary-color: #8a2be2;
+                --primary-color-rgb: #8a2be2;
             }
+        </style>
+
+    </head>
+
+    <body class="onepage dark-scheme">
+        <div id="wrapper">
+            <!-- header begin -->
+            <header class="header-full transparent">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="de-flex sm-pt10">
+                                <div class="de-flex-col">
+                                    <div class="de-flex-col">
+                                        <!-- logo begin -->
+                                        <div id="logo">
+                                            <a href="index.html">
+                                             <img src="./images/MyStack/Logo2.png" width="70" alt="">
+                                            </a>
+                                        </div>
+                                        <!-- logo close -->
+                                    </div>
+                                </div>
+                                <div class="de-flex-col header-col-right">
+                                    <ul id="mainmenu">
+                                        <li><a class="active" href="#top">Home<span></span></a></li>
+                                        <li><a href="#About">About<span></span></a></li>
+                                        <li><a href="#Projects">Projects<span></span></a></li>
+                                        <li><a href="#services">Service<span></span></a></li>
+                                        <li><a href="#Tech-Stack">Tech<span></span></a></li>  
+                                    </ul>
+                                    <div class="menu_side_area">
+                                        <span id="menu-btn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- header close -->
+            <div id="de-menu-container">
+                <div class="mainmenu-v2-wrap">
+                    <ul id="mainmenu-v2">
+                        <li><a class="active" href="#top">Home<span></span></a></li>
+                        <li><a href="#About">About me<span></span></a></li>
+                        <li><a href="#section-services">What I Do<span></span></a></li>
+                        <li><a href="#section-portfolio">Portfolio<span></span></a></li>
+                        <li><a href="#Tech-Stack">Tech<span></span></a></li>
+                        <li><a href="#Projects">Projects<span></span></a></li>
+                        <li><a href="#services">Service<span></span></a></li>
+                        <li><a href="#section-contact">Contact Me<span></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- content begin -->
+            <div class="no-bottom no-top" id="content">
+                <div id="top">
+                </div>
+
+                <!-- page preloader begin -->
+                <div id="preloader">
+                    <div class="preloader1">
+                    </div>
+                </div>
+                <!-- page preloader close -->
+                <div class="float-text show-on-scroll">
+                    <span><a href="#">Scroll to top</a></span>
+                </div>
+                <div class="scrollbar-v show-on-scroll"></div>            
+
+                <!-- load external content begin -->
+                <div id="de_modal">
+                    <button class="button-close"></button>
+                    <div class="d-modal-loader"></div>
+                </div>
+                <!-- load external content close -->
+
+                <section aria-label="section" class="jarallax no-top no-bottom">
+                    <!-- <img src="./images/MyStack/Wallpaper.jpg" class="jarallax-img" alt=""> -->
+
+                    <video  class="jarallax-img" autoplay loop muted playsinline>
+                        <source src="" type="video/mp4">
+                    </video>
+                   
+                    <div class="v-center">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-10">
+                                    <div class="spacer-10"></div>
+                                    <div class="h1_big text-white wow fadeInUp" data-wow-delay=".6s">I'm
+                                        <div class="typed-strings">
+                                            <p><span style="color: #8a2be2;">Software Architect</span></p>
+                                            <p><span style="color: #8a2be2;">S.D.E.T</span></p>
+                                            <p><span style="color: #8a2be2;">DevOps Engineer</span></p> 
+                                        </div>
+                                        <div class="typed"></div>
+                                    </div>
+                                    <div class="spacer-20"></div>
+                                    <p class="lead wow fadeInUp" data-wow-delay="1s">Software Engineer | S.D.E.T | DevOps</p>
+
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <h6>Let's Connect</h6>
+                                    I'm available at<br>
+
+                                    <div class="social-icons">
+                                        <a href="https://github.com/WahajT" target="_blank"><i class="fa fa-github fa-lg"></i></a>
+                                        <a href="https://www.linkedin.com/in/wahaj-tahir" target="_blank"><i class="fa fa-linkedin fa-lg"></i>
+                                       <a href="mailto:wahajtahir01@gmail.com"><i class="fa fa-envelope fa-lg"></i></a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#About" class="mouse-icon-click scroll-to wow fadeInUp" data-wow-delay=".8s">
+                    <span class="mouse fadeScroll relative" data-scroll-speed="10">
+                        <span class="scroll"></span>
+                    </span>
+                </a>
+            </section>
+
+            <section id="About">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 wow fadeInUp">
+                            <h5 class="wow fadeInUp">About Wahaj</h5>
+                            <h2 class="wow custom-scale-in-mask">I'm Wahaj and I will consult you with my expritse in devops and SDET</h2>
+                        </div>
+                    </div>
+                    <div class="spacer-single"></div>
+                    <div class="row gx-5 align-items-center">
+                        <div class="col-lg-6 mb-sm-30">
+                            <figure class="cap-front overflow-hidden" data-bottom-top="transform: translateY(50px);" data-top-bottom="transform: translateY(-50px);">
+                                <img src="./images/MyStack/Profile.png" class="img-fluid wow custom-anim-right" alt="">
+                                <figcaption class="wow fadeInRight" data-wow-delay="1s">Founder of W.T.S.S</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-lg-6 wow fadeInUp">
+                            <p style="text-align:left;">As a seasoned <span class="Highlight">Software Engineer</span> , I specialize in providing <span class="Highlight">Software Architect solutions</span>, overseeing <span class="Highlight">Software Quality Assurance</span> with a focus on automation, and implementing <span class="Highlight">DevOps practices</span>. I excel in crafting robust, scalable <span class="Highlight">software architectures</span> to lay the foundation for successful projects. Furthermore, I am dedicated to ensuring software quality, leveraging <span class="Highlight">automated testing</span> methodologies to maintain impeccable standards. In the realm of DevOps, I bridge the gap between development and operations by implementing efficient <span class="Highlight">CI/CD pipelines</span> and automating deployment processes. My collaborative spirit and proficiency enable me to drive the end-to-end success of software projects, from inception to delivery.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section id="Projects" class="bg-dark-2">
+                <div class="container">
+                    <div class="row gx-5">
+                        <div class="col-md-4">
+                            <h5 class="wow fadeInUp">Companies</h5><br>
+                            <h2 class="wow custom-scale-in-mask">Companies trusted me. </h2>
+                        </div>
+                        <div class="col-lg-8">
+                            <div id="carousel-blog-2-cols" class="owl-carousel wow fadeInUp">
+                                <div class="bloglist item">
+                                    <div class="post-content">
+                                        <div class="post-image">
+                                            <img src="./images/Project/Upgenics.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                            
+                                        </div>
+                                        <div class="post-text">
+                                            <h3>Upgenics international</h3>
+                                            <h5 class="d-tag">Upgenics internationa</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bloglist item">
+                                    <div class="post-content">
+                                        <div class="post-image">
+                                            <img src="./images/Project/Rendream.jpeg" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                            
+                                        </div>
+                                        <div class="post-text">
+                                            <h3>Rendream</h3>
+                                            <h5 class="d-tag">Rendream</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bloglist item">
+                                    <div class="post-content">
+                                        <div class="post-image">
+                                            <img src="./images/Project/Techandover.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                           
+                                        </div>
+                                        <div class="post-text">
+                                            <h3>Techandover LTD</h3>
+                                            <h5 class="d-tag">Techandover Ltd</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bloglist item">
+                                    <div class="post-content">
+                                        <div class="post-image">
+                                            <img src="./images/Project/Selteq.png" class="img-fluid" alt=""  style="width: 330px; height: 200px;">
+                                            
+                                        </div>
+                                        <div class="post-text">
+                                            <h3>Selteq Ltd</h3>
+                                            <h5 class="d-tag">Selteq Ltd</h5>       
+                                        </div>
+                                    </div>
+                                </div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+
+
             
-           
-            .intro-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            font-size: 14px; }
 
-         .dialog-box {
-         text-align: left;
-             }
-        }
-
-        #Wahaj{
-            color: blueviolet;
-        }
-        .Highlight
-        {
-            color: blueviolet;
-
-        }
-
-      
-   /* Experience Section   */
-/* .company-logo {
-    max-width: 100px; 
-    margin-bottom: 15px;
-}
-
-.experience {
-    background-color: #232D3F;
-    color: #FFFFFF;
-    padding: 50px;
-    text-align: center;
-}
-
-.experience h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.experience-item {
-    background-color: #005B41;
-    color: #FFFFFF;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.experience-info h3 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.experience-info p {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
-.experience-item p {
-    font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    .experience-item {
-        padding: 15px;
-    }
-}
- */
+            <section id="section-github" class="bg-dark-2">
+            <div class="container">
+                <div class="row gx-5">
+                    <div class="col-md-4">
+                        <h5 class="wow fadeInUp">Projects</h5><br>
+                        <h2 class="wow custom-scale-in-mask">Projects I have contributed to.</h2>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="before-after-carousel-big" class="owl-carousel wow fadeInUp">
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Project/PhoneCheck.svg" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>PhoneCheck</h3>
+                                        <h5 class="d-tag">PhoneCheck</h5>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Project/mobocheck-logo.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Mobocheck</h3>
+                                        <h5 class="d-tag">Mobocheck</h5>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
 
-    </style>
-</head>
-<body>
-    <div class="navbar">
-      <img width="100" src="./Logo.png" alt="LOGO">
-    </div>
+
+        <section id="section-github" class="bg-dark-2">
+            <div class="container">
+                <div class="row gx-5">
+                    <div class="col-md-4">
+                        <h5 class="wow fadeInUp">Memebership & Certificates</h5><br>
+                        <h2 class="wow custom-scale-in-mask">Memebership & Certificates</h2>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="items-carousel" class="owl-carousel wow fadeInUp">
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/WahajTahir.jpg" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Code Wars</h3>
+                                        <h5 class="d-tag">Code Wars</h5>
+                                    </div>
+                                </div>
+                            </div>
+       <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Azure.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Azure</h3>
+                                        <h5 class="d-tag">Azure</h5>
+                                    </div>
+                                </div>
+                            </div>
+       <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Branding.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Branding</h3>
+                                        <h5 class="d-tag">Branding</h5>
+                                    </div>
+                                </div>
+                            </div>
+                                  <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Career.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Career</h3>
+                                        <h5 class="d-tag">Career</h5>
+                                    </div>
+                                </div>
+                            </div>
+       <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Diara-22.JPG" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Diara-22</h3>
+                                        <h5 class="d-tag">Diara-22</h5>
+                                    </div>
+                                </div>
+                            </div>
+       <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Freelancing.JPG" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Freelancing</h3>
+                                        <h5 class="d-tag">Freelancing</h5>
+                                    </div>
+                                </div>
+                            </div>
+       <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Git_hub.jpg" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Git_hub</h3>
+                                        <h5 class="d-tag">Git_hub</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Graphic Designing.png" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Graphic Designing</h3>
+                                        <h5 class="d-tag">Graphic Designing</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Internet of things.PNG" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Internet of things</h3>
+                                        <h5 class="d-tag">Internet of things</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/JobFair-22.JPG" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>JobFair</h3>
+                                        <h5 class="d-tag">JobFair</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/LinuxCommand.jpg" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>LinuxCommand</h3>
+                                        <h5 class="d-tag">LinuxCommand</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more GitHub project items as needed -->
+                            <div class="bloglist item">
+                                <div class="post-content">
+                                    <div class="post-image">
+                                        <img src="./images/Certificates/Python.PNG" class="img-fluid" alt="" style="width: 330px; height: 200px;">
+                                    </div>
+                                    <div class="post-text">
+                                        <h3>Python</h3>
+                                        <h5 class="d-tag">Python</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+
+        <section id="services" class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row text-center mb-4">
+                    <div class="col-lg-12">
+                        <h2 class="wow fadeInUp">My Services</h2>
+                        <p class="lead wow fadeInUp" data-wow-delay=".2s">I offer a range of services to meet your needs</p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    
+                <div class="row text-center">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="service-box p-4 wow fadeInUp" data-wow-delay=".3s">
+                            <div class="service-icon mb-3">
+                                <i class="fa fa-bug fa-3x"></i>
+                            </div>
+                            <h4 class="service-title">Software Quality Assurance</h4>
+                            <p class="service-description">Conducting comprehensive security assessments to identify and mitigate vulnerabilities.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="service-box p-4 wow fadeInUp" data-wow-delay=".5s">
+                            <div class="service-icon mb-3">
+                                <i class="fa fa-cogs fa-3x"></i>
+                            </div>
+                            <h4 class="service-title">DevOps</h4>
+                            <p class="service-description">Implementing CI/CD pipelines and automating infrastructure management for seamless operations.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="service-box p-4 wow fadeInUp" data-wow-delay=".7s">
+                            <div class="service-icon mb-3">
+                                <i class="fa fa-file-code-o fa-3x"></i>
+                            </div>
+                            <h4 class="service-title">Software Architect</h4>
+                            <p class="service-description">Designing scalable, high-performance software architectures tailored to your business needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+            
+
+
+            
+        <section id="Tech-Stack">
+            <div class="row g-4"> 
+                <div class="col-lg-12 wow fadeInUp">
+                    <h5 class="wow fadeInUp">My Tech Stack</h5>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/javascript.svg" alt="Jira" class="skill-icon-3d">
+                        <h3 class="skill-title">JavaScript</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/python.svg" alt="Python" class="skill-icon-3d">
+                        <h3 class="skill-title">Python</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/bash.svg" alt="Bash" class="skill-icon-3d">
+                        <h3 class="skill-title">Bash</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/appium.svg "alt="Appium" class="skill-icon-3d">
+                        <h3 class="skill-title">Appium</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/selenium.svg" alt="Selenium" class="skill-icon-3d">
+                        <h3 class="skill-title">Selenium</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/robotframework.svg" alt="Robotframework" class="skill-icon-3d">
+                        <h3 class="skill-title">Robotframework</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/cypress.svg" alt="cypress" class="skill-icon-3d">
+                        <h3 class="skill-title">Cypress</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/gitlab.svg" alt="Gitlab" class="skill-icon-3d">
+                        <h3 class="skill-title">Gitlab</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/postman.svg" alt="Postman" class="skill-icon-3d">
+                        <h3 class="skill-title">Postman</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/latex.svg" alt="latex" class="skill-icon-3d">
+                        <h3 class="skill-title">Latex</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/docker.svg" alt="docker" class="skill-icon-3d">
+                        <h3 class="skill-title">Docker</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/kubernets.svg" alt="kubernets" class="skill-icon-3d">
+                        <h3 class="skill-title">kubernets</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="skill-icon-container">
+                        <img src="./images/MyStack/ansible.svg" alt="ansible" class="skill-icon-3d">
+                        <h3 class="skill-title">Ansible</h3>
+                    </div>
+                </div>
 
 
 
-<!-- Intor Section -->
-    <section id="intro" class="intro">
-        <video playsinline preload="auto" autoplay loop muted>
-          
-            <source src="./720p.mp4" type="video/mp4">
-          
-        </video>
-        <div class="intro-text">
-            <h1>I'm <span id="Wahaj"></span></h1>
-        </div>
 
+
+            </div>
+        </section>
+
+
+
+
+
+
+        
+
+            <div class="spacer-double bg-dark"></div>
+            <div class="no-bottom wow fadeInRight d-flex wow custom-scale-in-mask bg-dark">
+              <div class="de-marquee-list">
+                <div class="d-item">
+                  <span class="d-item-txt">DevOps</span>
+                  <span class="d-item-display">
+                  </span>
+                  <span class="d-item-txt line">S.D.E.T</span>
+                  <span class="d-item-display">
+                  </span>
+                  <span class="d-item-txt">Software Architect</span>
+                  <span class="d-item-display">
+                  </span>
+                  </div>
+              </div>
+          </div>
     </section>
 
 
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="profile-img">
-            <img  src="./W2.jpg" width="150"  alt="Wahaj Tahir">
-        </div>
-        <h2>About Wahaj</h2>
-        <div class="dialog-box">
-<p>As a seasoned <span class="Highlight">Software Engineer</span> , I specialize in providing <span class="Highlight">Software Architect solutions</span>, overseeing <span class="Highlight">Software Quality Assurance</span> with a focus on automation, and implementing <span class="Highlight">DevOps practices</span>. I excel in crafting robust, scalable <span class="Highlight">software architectures</span> to lay the foundation for successful projects. Furthermore, I am dedicated to ensuring software quality, leveraging <span class="Highlight">automated testing</span> methodologies to maintain impeccable standards. In the realm of DevOps, I bridge the gap between development and operations by implementing efficient <span class="Highlight">CI/CD pipelines</span> and automating deployment processes. My collaborative spirit and proficiency enable me to drive the end-to-end success of software projects, from inception to delivery.</p>
-<span class="Highlight"></span>
+    <section id="testimonials" class="dark-scheme py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">What My Clients Say</h2>
+                    <div id="carouselTestimonials" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="testimonial-item">
+                                    <img src="images/client1.jpg" class="rounded-circle mb-3" alt="Client 1" style="width: 100px; height: 100px;">
+                                    <h5 class="mb-1">Client1</h5>
+                                    <p class="text-muted">Client1</p>
+                                    <p class="testimonial-text">
+                                        Client1
+                                    </p>
+                                    <div class="rating">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more testimonial items as needed -->
+                            <div class="carousel-item">
+                                <div class="testimonial-item">
+                                    <img src="images/client2.jpg" class="rounded-circle mb-3" alt="Client 2" style="width: 100px; height: 100px;">
+                                    <h5 class="mb-1">Client2</h5>
+                                    <p class="text-muted">Client2</p>
+                                    <p class="testimonial-text">
+                                        Client2  
+                                    </p>
+                                    <div class="rating">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+  <!-- Add more testimonial items as needed -->
+                            
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-<!-- Experience Section -->
-    <!-- <section class="experience">
-        <h2>Experience</h2>
-        <div class="experience-item">
-            <img src="./logo.png" alt="Company A Logo" class="company-logo">
-            <div class="experience-info">
-                <h3>Web Developer</h3>
-                <p>Company A - 2020 to Present</p>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis nunc ac justo dictum euismod.</p>
-        </div>
-        <div class="experience-item">
-            <img src="./logo2.jpeg" alt="Company B Logo" class="company-logo">
-            <div class="experience-info">
-                <h3>UX/UI Designer</h3>
-                <p>Company B - 2018 to 2020</p>
-            </div>
-            <p>Proin scelerisque orci in erat auctor, a auctor est ultricies.</p>
-        </div>
-    </section> -->
-
-
-<!-- Tech Stack Section -->
-<section id="tech-stack" class="tech-stack">
-        <h1> My Tech Stack</h1>
- <div>
-     <!-- JAVASCRIPT -->
-     <img  width="96 " src="./MyStack/javascript.svg" alt="Javascript">
-     <!-- PYTHON -->
-     <img  width="96 " src="./MyStack/python.svg" alt="Python">
-     <!-- BASH -->
-     <img  width="96 " src="./MyStack/bash.svg" alt="Bash">
- 
-  </div>
- <!-- New Line -->
- <div>
-     <!-- APPIUM -->
-     <img  width="96" src="./MyStack/appium.svg" alt="Appium">
-      <!-- SELENIUM -->
-     <img  width="96" src="./MyStack/selenium.svg" alt="selenium">
-    <!-- RobotFrameWork -->
- <img  width="96" src="./MyStack/robotframework.svg" alt="Robot">
-   </div>
- <!-- New Line -->
- <div>
-     <!-- GITLAB -->
-     <img  width="96" src="./MyStack/gitlab.svg" alt="Gitlab">
-
-        <!-- POSTMAN -->
- <img  width="96" src="./MyStack/postman.svg" alt="Postman">
-        <!-- LATEX -->
- <img  width="100"  src="./MyStack/latex.svg" alt="Latex">
-
- </div>
-
-  <!-- New Line -->
-  <div>
-    <!-- DOCKER -->
-    <img  width="96" src="./MyStack/docker.svg" alt="Docker">
-
-       <!-- KUBERNETS -->
-    <img  width="96" src="./MyStack/kubernets.svg" alt="Kubernets">
-     
-    <!-- ANSIBLE -->
-    <img  width="75"  src="./MyStack/ansible.svg" alt="Ansible">
     
 
-</div>
 
-   <!-- New Line -->
-   <div>
-  <!-- AWS -->
-  <img  width="96"  src="./MyStack/AWS.svg" alt="Aws">
-   </div>
+    
 
 
-     <!-- New Line -->
 
-
-</section>
-<!-- FOOTER SECTIONS -->
-
-<div class="footer">
-    <div>
-    <p>&copy; 2023 Wahaj Tahir</p>
-</div>
-    <div class="social">
-         <!-- GMAIL -->
-        <a href="mailto:wahajtahir01@gmail.com"><svg xmlns="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSHwrwxdTrdvHJRgKZmKfqmMCKcFMSMGMKzXDPlJlWznvXlNvDXjsssxSfxsWNmMnMNkHhhL" x="0px" y="0px" width="50" height="50" viewBox="0 0 30 30">
-            <path d="M 6 7.03125 C 5.691406 7.03125 5.402344 7.089844 5.125 7.175781 L 8.039063 9.03125 L 23.960938 9.03125 L 26.875 7.175781 C 26.597656 7.089844 26.308594 7.03125 26 7.03125 Z M 4.113281 7.71875 C 3.4375 8.269531 3 9.097656 3 10.03125 L 3 23.03125 C 3 24.683594 4.347656 26.03125 6 26.03125 L 26 26.03125 C 27.652344 26.03125 29 24.683594 29 23.03125 L 29 10.03125 C 29 9.097656 28.5625 8.269531 27.886719 7.71875 L 16 15.28125 Z M 6 12.445313 L 16 18.8125 L 26 12.445313 L 26 24.03125 L 6 24.03125 Z"></path>
-        </svg></a>
-         <!-- GITHUB -->
-        <a href="https://github.com/WahajT"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 30 30">
-            <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
-        </svg></a>
-        <!-- LINKDEIN -->
-        <a href="https://www.linkedin.com/in/wahaj-tahir-53bb941bb/"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 30 30">
-            <path d="M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.105,4,24,4z M10.954,22h-2.95 v-9.492h2.95V22z M9.449,11.151c-0.951,0-1.72-0.771-1.72-1.72c0-0.949,0.77-1.719,1.72-1.719c0.948,0,1.719,0.771,1.719,1.719 C11.168,10.38,10.397,11.151,9.449,11.151z M22.004,22h-2.948v-4.616c0-1.101-0.02-2.517-1.533-2.517 c-1.535,0-1.771,1.199-1.771,2.437V22h-2.948v-9.492h2.83v1.297h0.04c0.394-0.746,1.356-1.533,2.791-1.533 c2.987,0,3.539,1.966,3.539,4.522V22z"></path>
-        </svg></a>
+  <!-- content close -->
+  <!-- footer begin -->
+  <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="index.html">
+                    <span class="copy">&copy; Copyright 2024 - Wahaj Tahir</span>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="social-icons">
+                    <a href="https://github.com/WahajT" target="_blank"><i class="fa fa-github fa-lg"></i></a>
+                    <a href="https://www.linkedin.com/in/wahaj-tahir" target="_blank"><i class="fa fa-linkedin fa-lg"></i>
+                     <a href="mailto:wahajtahir01@gmail.com"><i class="fa fa-envelope fa-lg"></i></a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
     </div>
-</div>
-
-
-    <script>  
-  
-
-        // typed js animation
-        var typed = new Typed('#Wahaj', {
-            strings: ['Software Architect', 'S.D.E.T', 'Devops Engineer'],
-            typeSpeed: 100,
-            backSpeed: 50,
-            loop: true
-        });
-
-        // Smooth scrolling animation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                window.scrollTo({
-                    top: targetElement.offsetTop,
-                    behavior: 'smooth'
-                });
+    <!-- Javascript Files
+        ================================================== -->
+        <script src="js/plugins.min.js"></script>
+        <script src="js/designesia.js"></script>
+        <script src="js/custom-marquee.js"></script>  
+        <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+        <script src="form.js"></script>
+        <script>
+            jQuery(function($) {
+                $('.g-recaptcha').attr('data-theme', 'dark');
+            });
+        </script>
+        <script>
+            jQuery(document).ready(function() {
+                $(function() {
+            // jquery typed plugin
+            $(".typed").typed({
+                stringsElement: $('.typed-strings'),
+                typeSpeed: 100,
+                backDelay: 500,
+                loop: true,
+                contentType: 'html', // or text
+                // defaults to false for infinite loop
+                loopCount: false,
+                callback: function() { null; },
+                resetCallback: function() { newTyped(); }
             });
         });
-    </script>
-</body>
-</html>
+            });
+        </script>
+    </body>
 
+    </html>
