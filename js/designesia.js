@@ -644,6 +644,79 @@
             }
         });
 
+        jQuery("#carousel-blog-1").owlCarousel({
+            center: false,
+            items: 2,
+            loop: false,
+            margin: 25,
+            responsive: {
+                1000: {
+                    items: 2
+                },
+                600: {
+                    items: 2
+                },
+                0: {
+                    items: 1
+                }
+            }
+        });
+
+        jQuery("#carousel-blog-2").owlCarousel({
+            center: false,
+            items: 2,
+            loop: false,
+            margin: 25,
+            responsive: {
+                1000: {
+                    items: 2
+                },
+                600: {
+                    items: 2
+                },
+                0: {
+                    items: 1
+                }
+            }
+        });
+
+        jQuery("#carousel-blog-3").owlCarousel({
+            center: false,
+            items: 2,
+            loop: false,
+            margin: 25,
+            responsive: {
+                1000: {
+                    items: 2
+                },
+                600: {
+                    items: 2
+                },
+                0: {
+                    items: 1
+                }
+            }
+        });
+
+        jQuery("#carousel-blog-4").owlCarousel({
+            center: false,
+            items: 2,
+            loop: false,
+            margin: 25,
+            responsive: {
+                1000: {
+                    items: 2
+                },
+                600: {
+                    items: 2
+                },
+                0: {
+                    items: 1
+                }
+            }
+        });
+
+
         jQuery("#owl-logo").owlCarousel({
             center: false,
             items: 6,
