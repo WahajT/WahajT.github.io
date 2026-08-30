@@ -1,32 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+import SectionHeader from './SectionHeader.astro';
 import Icon from './Icon.astro';
 
-const projects = (await getCollection('projects', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
-// Tech-filter chips only earn their place with enough projects to filter.
 const showFilter = projects.length >= 4;
-const allTags = [
-  ...new Set(projects.flatMap((p) => p.data.stack)),
-].sort();
+const allTags = [...new Set(projects.flatMap((p) => p.data.stack))].sort();
 ---
 
-<section id="projects" class="section section--tint" aria-labelledby="projects-title">
+<section id="projects" class="section section--tint">
   <div class="container">
-    <div class="fp__head" data-reveal>
-      <p class="eyebrow">Selected work</p>
-      <h2 id="projects-title" class="section-title">Projects, with the outcomes.</h2>
-      <p class="section-intro">
-        Each one links to a short case study — the problem, what I built, and what
-        changed as a result.
-      </p>
-    </div>
+    <SectionHeader
+      index="03"
+      eyebrow="Selected work"
+      title="Projects, with the outcomes."
+      intro="Each one links to a short case study — the problem, what I built, and what changed as a result."
+    />
 
     {
       showFilter && (
-        <div class="fp__filter" role="group" aria-label="Filter projects by technology">
+        <div class="fp__filter" role="group" aria-label="Filter projects by technology" data-reveal>
           <button type="button" class="fp__chip is-active" data-filter="*">
             All
           </button>
@@ -44,7 +41,12 @@ const allTags = [
     </div>
 
     <p class="fp__more" data-reveal>
-      <a class="btn btn--ghost" href="https://github.com/WahajT" target="_blank" rel="noopener noreferrer">
+      <a
+        class="btn btn--ghost"
+        href="https://github.com/WahajT"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Icon name="github" />
         More on GitHub
       </a>
@@ -53,9 +55,6 @@ const allTags = [
 </section>
 
 <style>
-  .fp__head {
-    margin-bottom: var(--space-xl);
-  }
   .fp__filter {
     display: flex;
     flex-wrap: wrap;
@@ -63,13 +62,14 @@ const allTags = [
     margin-bottom: var(--space-xl);
   }
   .fp__chip {
-    padding: 0.35rem 0.8rem;
+    padding: 0.35rem 0.85rem;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-muted);
+    font-family: var(--font-mono);
     font-size: var(--step--1);
-    font-weight: 550;
+    font-weight: 500;
     transition:
       color var(--dur-fast) var(--ease-out),
       background var(--dur-fast) var(--ease-out),
@@ -79,14 +79,14 @@ const allTags = [
     color: var(--text);
   }
   .fp__chip.is-active {
-    color: var(--accent-contrast);
-    background: var(--accent);
-    border-color: var(--accent);
+    color: var(--brand-ink);
+    background: var(--brand);
+    border-color: var(--brand);
   }
   .fp__grid {
     display: grid;
     gap: var(--space-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
   }
   .fp__grid > [hidden] {
     display: none;

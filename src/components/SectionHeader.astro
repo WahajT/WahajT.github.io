@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** Two-digit section index, e.g. "01". Also used for the ghost numeral. */
+  index: string;
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  /** Show the oversized ghost numeral behind the section. */
+  ghost?: boolean;
+}
+const { index, eyebrow, title, intro, ghost = true } = Astro.props;
+---
+
+{ghost && <span class="section__ghost" aria-hidden="true">{index}</span>}
+
+<header class="sec-head" data-reveal>
+  <p class="sec-head__eyebrow">
+    <span class="sec-head__index">{index}</span>
+    <span>{eyebrow}</span>
+  </p>
+  <h2 class="sec-head__title">{title}</h2>
+  {intro && <p class="sec-head__intro">{intro}</p>}
+</header>

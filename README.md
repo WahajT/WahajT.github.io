@@ -9,10 +9,11 @@ SEO-first **Astro** static site. Deploys to GitHub Pages
 | Concern | Choice |
 | --- | --- |
 | Framework | [Astro](https://astro.build) 5 — zero JS by default, HTML pre-rendered |
-| Styling | Plain CSS + custom-property design tokens (`src/styles/`) |
+| Styling | Plain CSS + custom-property design tokens (`src/styles/tokens.css`) — "editorial premium" direction: display headings, section watermark numerals, film-grain texture, soft depth |
+| Theme | Follows the visitor's OS `prefers-color-scheme` — no toggle. Brand accent `#7338CF` in both modes (nudged to `#b491ec` for accent *text* on dark so it clears WCAG AA) |
 | Content | Typed content collection for project case studies (`src/content/projects/`) |
-| Images | `astro:assets` → AVIF/WebP, responsive, dimensioned |
-| Fonts | Self-hosted **Inter Variable** (`@fontsource-variable/inter`, latin subset) |
+| Images | `astro:assets` → WebP, responsive, dimensioned |
+| Fonts | Self-hosted variable fonts, latin subset only: **Space Grotesk** (display) + **Inter** (body) |
 | Icons | Inline SVG (`src/components/Icon.astro`) — no icon font |
 | SEO | `src/components/Seo.astro` — per-page title/OG/Twitter + JSON-LD; `@astrojs/sitemap` |
 | Contact | [Web3Forms](https://web3forms.com) (static-friendly) with a `mailto:` fallback |

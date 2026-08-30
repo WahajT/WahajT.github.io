@@ -25,16 +25,16 @@ const ogSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b0b0f"/>
+      <stop offset="0" stop-color="#0c0b10"/>
       <stop offset="1" stop-color="#171227"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="0" y="0" width="1200" height="8" fill="#a78bfa"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#b491ec"/>
   <g font-family="Inter, -apple-system, Segoe UI, Roboto, sans-serif">
-    <text x="80" y="150" fill="#a78bfa" font-size="30" font-weight="600" letter-spacing="6">PORTFOLIO</text>
+    <text x="80" y="150" fill="#b491ec" font-size="30" font-weight="600" letter-spacing="6">PORTFOLIO</text>
     <text x="78" y="300" fill="#ececf0" font-size="104" font-weight="700">${NAME}</text>
-    <text x="80" y="370" fill="#a78bfa" font-size="46" font-weight="600">${ROLE}</text>
+    <text x="80" y="370" fill="#b491ec" font-size="46" font-weight="600">${ROLE}</text>
     <text x="80" y="470" fill="#a6a6b2" font-size="30" font-weight="400">${TAG}</text>
     <text x="80" y="560" fill="#7c7c88" font-size="26" font-weight="500">${SITE}</text>
   </g>
@@ -42,7 +42,7 @@ const ogSvg = `
 
 const iconSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#6d28d9"/>
+  <rect width="64" height="64" rx="14" fill="#7338cf"/>
   <path d="M14 18h7l4.4 20L30 18h6l4.6 20L45 18h5L43.5 46h-7l-4.7-19.6L27.2 46h-7L14 18Z" fill="#fff"/>
 </svg>`;
 

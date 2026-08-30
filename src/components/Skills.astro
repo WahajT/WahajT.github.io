@@ -1,45 +1,32 @@
 ---
 import { Image } from 'astro:assets';
 import { skillGroups } from '@/data/skills';
+import SectionHeader from './SectionHeader.astro';
 ---
 
-<section id="skills" class="section" aria-labelledby="skills-title">
+<section id="skills" class="section">
   <div class="container">
-    <div class="skills__head" data-reveal>
-      <p class="eyebrow">Skills</p>
-      <h2 id="skills-title" class="section-title">The tools I reach for.</h2>
-      <p class="section-intro">
-        Grouped by what they're for. <strong>Primary</strong> means daily use and
-        interview-ready; <strong>working</strong> means productive when a project
-        calls for it.
-      </p>
-    </div>
+    <SectionHeader
+      index="04"
+      eyebrow="Skills"
+      title="The tools I reach for."
+      intro="Grouped by what they're for. Primary means daily use and interview-ready; working means productive when a project calls for it."
+    />
 
     <div class="skills__grid">
       {
         skillGroups.map((group, i) => (
-          <article class="skills__group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <article class="skills__group card card--hover" data-reveal style={`--reveal-delay:${i * 55}ms`}>
             <h3 class="skills__group-title">{group.title}</h3>
             <p class="skills__group-blurb">{group.blurb}</p>
             <ul class="skills__list" role="list">
               {group.skills.map((s) => (
                 <li class="skills__item" data-level={s.level}>
                   {s.icon && (
-                    <Image
-                      src={s.icon}
-                      alt=""
-                      width={22}
-                      height={22}
-                      densities={[1, 2]}
-                      loading="lazy"
-                    />
+                    <Image src={s.icon} alt="" width={22} height={22} densities={[1, 2]} loading="lazy" />
                   )}
                   <span>{s.name}</span>
-                  {s.level === 'primary' && (
-                    <span class="skills__badge" title="Primary — daily use">
-                      ●
-                    </span>
-                  )}
+                  {s.level === 'primary' && <span class="skills__badge" title="Primary — daily use" />}
                 </li>
               ))}
             </ul>
@@ -51,19 +38,13 @@ import { skillGroups } from '@/data/skills';
 </section>
 
 <style>
-  .skills__head {
-    margin-bottom: var(--space-2xl);
-  }
   .skills__grid {
     display: grid;
     gap: var(--space-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   }
   .skills__group {
-    padding: var(--space-lg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--surface);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
   }
   .skills__group-title {
     font-size: var(--step-1);
@@ -89,7 +70,7 @@ import { skillGroups } from '@/data/skills';
     font-size: var(--step--1);
     font-weight: 500;
     color: var(--text-muted);
-    background: var(--bg);
+    background: var(--surface-2);
   }
   .skills__item[data-level='primary'] {
     color: var(--text);
@@ -102,8 +83,9 @@ import { skillGroups } from '@/data/skills';
     object-fit: contain;
   }
   .skills__badge {
-    font-size: 0.5rem;
-    color: var(--accent);
-    line-height: 1;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--brand);
   }
 </style>

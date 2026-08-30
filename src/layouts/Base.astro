@@ -21,7 +21,7 @@ const { title, description, image, type, jsonLd, noindex } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0c0b10" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -43,7 +43,6 @@ const { title, description, image, type, jsonLd, noindex } = Astro.props;
       noindex={noindex}
     />
 
-    {/* If JS is off, don't leave scroll-reveal content stuck at opacity:0. */}
     <noscript>
       <style>
         [data-reveal] {
@@ -52,30 +51,30 @@ const { title, description, image, type, jsonLd, noindex } = Astro.props;
         }
       </style>
     </noscript>
-
-    {/* Set theme before first paint — no flash of the wrong colour scheme. */}
-    <script is:inline>
-      (function () {
-        try {
-          var t = localStorage.getItem('theme');
-          if (t === 'light' || t === 'dark') {
-            document.documentElement.setAttribute('data-theme', t);
-          }
-        } catch (e) {}
-      })();
-    </script>
   </head>
 
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <Header />
     <main id="main">
       <slot />
     </main>
     <Footer />
 
-    {/* Progressive enhancement: entrance reveal + active-nav highlighting. */}
     <script>
+      // ---- Scroll progress bar ----------------------------------------
+      const bar = document.getElementById('scroll-progress');
+      const setProgress = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? h.scrollTop / max : 0;
+        bar?.style.setProperty('--p', String(p));
+      };
+      setProgress();
+      window.addEventListener('scroll', setProgress, { passive: true });
+      window.addEventListener('resize', setProgress, { passive: true });
+
       // ---- Scroll reveal --------------------------------------------------
       const revealables = document.querySelectorAll<HTMLElement>('[data-reveal]');
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

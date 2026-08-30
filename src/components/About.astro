@@ -1,5 +1,6 @@
 ---
 import { site } from '@/data/site';
+import SectionHeader from './SectionHeader.astro';
 
 /* TODO(wahaj): rewrite these three points in your own voice. Keep them short
    and concrete — what you do, the domain, and one thing you're known for. */
@@ -17,15 +18,20 @@ const facts = [
 ];
 ---
 
-<section id="about" class="section" aria-labelledby="about-title">
-  <div class="container about">
-    <div class="about__aside" data-reveal>
-      <p class="eyebrow">About</p>
-      <h2 id="about-title" class="section-title">
-        SDET who treats the pipeline as part of the product.
-      </h2>
+<section id="about" class="section">
+  <div class="container">
+    <SectionHeader
+      index="01"
+      eyebrow="About"
+      title="SDET who treats the pipeline as part of the product."
+    />
 
-      <dl class="about__facts">
+    <div class="about__grid">
+      <div class="about__points" data-reveal>
+        {points.map((p, i) => <p style={`--reveal-delay:${i * 60}ms`}>{p}</p>)}
+      </div>
+
+      <dl class="about__facts card" data-reveal>
         {
           facts.map((f) => (
             <div>
@@ -36,55 +42,19 @@ const facts = [
         }
       </dl>
     </div>
-
-    <div class="about__points">
-      {
-        points.map((p, i) => (
-          <p data-reveal style={`--reveal-delay:${i * 70}ms`}>
-            {p}
-          </p>
-        ))
-      }
-    </div>
   </div>
 </section>
 
 <style>
-  .about {
+  .about__grid {
     display: grid;
     gap: clamp(2rem, 5vw, 3.5rem);
   }
   @media (min-width: 880px) {
-    .about {
-      grid-template-columns: 0.9fr 1.1fr;
+    .about__grid {
+      grid-template-columns: 1.1fr 0.9fr;
       align-items: start;
     }
-  }
-
-  .about__facts {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin-top: var(--space-xl);
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-  .about__facts > div {
-    background: var(--surface);
-    padding: var(--space-md) var(--space-lg);
-  }
-  .about__facts dt {
-    font-size: var(--step--1);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-caps);
-    color: var(--text-faint);
-  }
-  .about__facts dd {
-    margin-top: 0.25rem;
-    font-weight: 600;
-    color: var(--text);
   }
 
   .about__points {
@@ -95,9 +65,30 @@ const facts = [
     max-width: var(--measure);
   }
 
-  @media (min-width: 880px) {
-    .about__points {
-      padding-top: 3.25rem;
-    }
+  .about__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+  }
+  .about__facts > div {
+    padding: var(--space-md) var(--space-lg);
+  }
+  .about__facts > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+  .about__facts > div:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+  .about__facts dt {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+  }
+  .about__facts dd {
+    margin-top: 0.3rem;
+    font-weight: 600;
+    color: var(--text);
   }
 </style>

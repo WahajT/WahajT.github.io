@@ -11,7 +11,7 @@ const { data, id } = project;
 const href = `/projects/${id}`;
 ---
 
-<article class="pcard" data-stack={data.stack.join('|').toLowerCase()}>
+<article class="pcard card card--hover" data-stack={data.stack.join('|').toLowerCase()}>
   <a class="pcard__media" href={href} tabindex="-1" aria-hidden="true">
     <Image
       src={data.cover}
@@ -67,40 +67,37 @@ const href = `/projects/${id}`;
   .pcard {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--surface);
     overflow: hidden;
-    transition:
-      border-color var(--dur-mid) var(--ease-out),
-      transform var(--dur-mid) var(--ease-out);
-  }
-  .pcard:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-3px);
   }
   .pcard__media {
     display: block;
-    background: var(--bg-subtle);
+    background:
+      radial-gradient(circle at 30% 20%, var(--accent-surface), transparent 60%),
+      var(--surface-2);
     border-bottom: 1px solid var(--border);
     aspect-ratio: 16 / 9;
-    padding: var(--space-lg);
+    padding: clamp(1.25rem, 4vw, 2rem);
   }
   .pcard__media :global(img) {
     width: 100%;
     height: 100%;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .pcard:hover .pcard__media :global(img) {
+    transform: scale(1.03);
   }
   .pcard__body {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    padding: var(--space-lg);
+    padding: clamp(1.25rem, 3vw, 1.6rem);
   }
   .pcard__period {
-    font-size: var(--step--1);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
     color: var(--text-faint);
     text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: 0.08em;
   }
   .pcard__title {
     font-size: var(--step-2);
@@ -109,8 +106,13 @@ const href = `/projects/${id}`;
     color: var(--text);
     text-decoration: none;
   }
+  .pcard__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
   .pcard__title a:hover {
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .pcard__summary {
     color: var(--text-muted);
@@ -122,7 +124,7 @@ const href = `/projects/${id}`;
   }
   .pcard__impact li {
     position: relative;
-    padding-left: 1.2rem;
+    padding-left: 1.25rem;
     font-size: var(--step--1);
     color: var(--text-muted);
   }
@@ -130,7 +132,7 @@ const href = `/projects/${id}`;
     content: '↗';
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .pcard__stack {
     display: flex;
@@ -147,6 +149,8 @@ const href = `/projects/${id}`;
     margin-top: var(--space-sm);
     padding-top: var(--space-md);
     border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
   .pcard__cta {
     display: inline-flex;
@@ -160,8 +164,8 @@ const href = `/projects/${id}`;
     width: 1rem;
     transition: transform var(--dur-fast) var(--ease-out);
   }
-  .pcard__cta:hover :global(svg) {
-    transform: translateX(3px);
+  .pcard:hover .pcard__cta :global(svg) {
+    transform: translateX(4px);
   }
   .pcard__ext {
     display: inline-flex;

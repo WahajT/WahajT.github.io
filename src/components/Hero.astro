@@ -13,7 +13,12 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="container hero__grid">
+  <div class="hero__bg" aria-hidden="true">
+    <span class="hero__glow"></span>
+    <span class="hero__grid"></span>
+  </div>
+
+  <div class="container hero__grid-wrap">
     <div class="hero__body">
       {
         site.availability.open && (
@@ -24,11 +29,8 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
         )
       }
 
-      <h1 id="hero-title" class="hero__title">
-        {site.name}
-        <span class="hero__role">{site.role}</span>
-      </h1>
-
+      <h1 id="hero-title" class="hero__title">{site.name}</h1>
+      <p class="hero__role">{site.role}</p>
       <p class="hero__headline">{site.headline}</p>
 
       <div class="hero__cta">
@@ -48,6 +50,7 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
           site.socials.map((s) => (
             <li>
               <a
+                class="link-underline"
                 href={s.url}
                 target={s.url.startsWith('http') ? '_blank' : undefined}
                 rel={s.url.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -61,39 +64,74 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
       </ul>
     </div>
 
-    <div class="hero__portrait">
+    <figure class="hero__portrait">
       <Image
         src={profile}
         alt={`Portrait of ${site.name}`}
-        width={420}
-        height={520}
-        widths={[280, 420, 640, 840]}
-        sizes="(max-width: 900px) 60vw, 360px"
-        formats={['avif', 'webp']}
+        width={440}
+        height={548}
+        widths={[280, 440, 640, 880]}
+        sizes="(max-width: 900px) 55vw, 380px"
+        format="webp"
         loading="eager"
         fetchpriority="high"
         decoding="async"
       />
-      <p class="hero__portrait-tag">
+      <figcaption class="hero__portrait-tag">
         <Icon name="pin" />
         {site.location} · {site.timezone}
-      </p>
-    </div>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
 <style>
   .hero {
-    padding-block: clamp(2.5rem, 8vw, 6rem) clamp(2.5rem, 7vw, 5rem);
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 9vw, 7rem) clamp(3rem, 8vw, 5.5rem);
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .hero__glow {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: min(60rem, 90vw);
+    height: min(60rem, 90vw);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--brand) 32%, transparent),
+      transparent 62%
+    );
+    filter: blur(20px);
+    opacity: 0.55;
   }
   .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--border-strong) 1px, transparent 0);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 75%);
+    opacity: 0.5;
+  }
+
+  .hero__grid-wrap {
+    position: relative;
     display: grid;
-    gap: clamp(2rem, 6vw, 4rem);
+    gap: clamp(2rem, 6vw, 4.5rem);
     align-items: center;
   }
   @media (min-width: 900px) {
-    .hero__grid {
-      grid-template-columns: 1.4fr 0.9fr;
+    .hero__grid-wrap {
+      grid-template-columns: 1.5fr 0.85fr;
     }
   }
 
@@ -101,12 +139,13 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.35rem 0.8rem;
+    padding: 0.4rem 0.85rem;
     border: 1px solid var(--accent-border);
     background: var(--accent-surface);
     border-radius: var(--radius-full);
-    font-size: var(--step--1);
-    font-weight: 550;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
     color: var(--text-muted);
     margin-bottom: var(--space-lg);
   }
@@ -114,39 +153,40 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #1a9c5b;
-    box-shadow: 0 0 0 3px color-mix(in srgb, #1a9c5b 25%, transparent);
+    background: #1f9d55;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #1f9d55 25%, transparent);
   }
   @media (prefers-reduced-motion: no-preference) {
     .hero__status-dot {
-      animation: pulse 2.4s var(--ease-out) infinite;
+      animation: pulse 2.6s var(--ease-out) infinite;
     }
     @keyframes pulse {
       0%,
       100% {
-        box-shadow: 0 0 0 3px color-mix(in srgb, #1a9c5b 25%, transparent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, #1f9d55 25%, transparent);
       }
       50% {
-        box-shadow: 0 0 0 6px color-mix(in srgb, #1a9c5b 0%, transparent);
+        box-shadow: 0 0 0 7px color-mix(in srgb, #1f9d55 0%, transparent);
       }
     }
   }
 
   .hero__title {
     font-size: var(--step-5);
-    line-height: 1.05;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
   }
   .hero__role {
-    display: block;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
     font-size: var(--step-2);
-    font-weight: 550;
-    color: var(--accent);
+    font-weight: 500;
+    color: var(--accent-text);
     letter-spacing: var(--tracking-tight);
   }
   .hero__headline {
     margin-top: var(--space-lg);
-    max-width: 46ch;
+    max-width: 42ch;
     font-size: var(--step-1);
     color: var(--text-muted);
   }
@@ -169,8 +209,8 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     align-items: center;
     gap: 0.45rem;
     color: var(--text-muted);
-    text-decoration: none;
     font-size: var(--step--1);
+    font-family: var(--font-mono);
   }
   .hero__socials a:hover {
     color: var(--text);
@@ -181,16 +221,28 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
   }
 
   .hero__portrait {
+    position: relative;
     justify-self: center;
+    width: min(380px, 72vw);
+  }
+  .hero__portrait::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    translate: 14px 14px;
+    border: 1px solid var(--brand);
+    border-radius: var(--radius-lg);
+    opacity: 0.55;
+    z-index: -1;
   }
   .hero__portrait :global(img) {
-    width: min(360px, 70vw);
+    width: 100%;
     height: auto;
-    aspect-ratio: 42 / 52;
+    aspect-ratio: 44 / 52;
     object-fit: cover;
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
   }
   .hero__portrait-tag {
     display: flex;
@@ -198,18 +250,18 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     gap: 0.4rem;
     margin-top: var(--space-sm);
     color: var(--text-faint);
-    font-size: var(--step--1);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
   }
   .hero__portrait-tag :global(svg) {
     width: 1rem;
     height: 1rem;
   }
+
   @media (max-width: 899px) {
     .hero__portrait {
       justify-self: start;
-    }
-    .hero__portrait :global(img) {
-      width: min(260px, 55vw);
+      width: min(240px, 52vw);
     }
   }
 </style>
