@@ -47,12 +47,7 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
       </nav>
     </div>
 
-    <p class="site-footer__wordmark" aria-hidden="true">{site.name}</p>
-
-    <div class="site-footer__meta">
-      <p>© {year} {site.name}. All rights reserved.</p>
-      <p>Built with Astro · hosted on GitHub Pages · <a href="#main" class="link-underline">Back to top ↑</a></p>
-    </div>
+    <p class="site-footer__copy">© {year} {site.name}. All rights reserved.</p>
   </div>
 </footer>
 
@@ -60,8 +55,7 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
   .site-footer {
     border-top: 1px solid var(--border);
     background: var(--bg-subtle);
-    padding-block: var(--space-2xl) var(--space-lg);
-    overflow: hidden;
+    padding-block: var(--space-xl) var(--space-lg);
   }
   .site-footer__top {
     display: flex;
@@ -81,7 +75,7 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
   }
   @media (prefers-color-scheme: dark) {
     .site-footer__mark {
-      filter: brightness(1.15) saturate(1.05);
+      filter: brightness(1.18) saturate(1.05);
     }
   }
   .site-footer__name {
@@ -122,33 +116,12 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     height: 1.15rem;
   }
 
-  .site-footer__wordmark {
-    margin-block: clamp(1.5rem, 5vw, 3rem) 0;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(3rem, 15vw, 10rem);
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--border-strong);
-    opacity: 0.5;
-    user-select: none;
-    white-space: nowrap;
-  }
-
-  .site-footer__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-lg);
-    justify-content: space-between;
-    margin-top: var(--space-md);
+  .site-footer__copy {
+    margin-top: var(--space-lg);
     padding-top: var(--space-md);
     border-top: 1px solid var(--border);
     color: var(--text-faint);
     font-family: var(--font-mono);
     font-size: 0.78rem;
-  }
-  .site-footer__meta a {
-    color: var(--text-muted);
   }
 </style>
