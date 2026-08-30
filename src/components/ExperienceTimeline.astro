@@ -10,7 +10,7 @@ import SectionHeader from './SectionHeader.astro';
       index="02"
       eyebrow="Experience"
       title="Where I've done the work."
-      intro="Six years across QA and platform teams, moving from manual testing into automation ownership and delivery pipelines."
+      intro="Across QA and platform teams — from manual testing into owning automation frameworks and the CI/CD that runs them."
     />
 
     <ol class="xp" role="list">
@@ -18,7 +18,17 @@ import SectionHeader from './SectionHeader.astro';
         experience.map((job, i) => (
           <li class="xp__item" data-reveal style={`--reveal-delay:${Math.min(i, 4) * 55}ms`}>
             <div class="xp__marker" aria-hidden="true">
-              <Image src={job.logo} alt="" width={44} height={44} densities={[1, 2]} loading="lazy" />
+              {job.logo ? (
+                <Image src={job.logo} alt="" width={44} height={44} densities={[1, 2]} loading="lazy" />
+              ) : (
+                <span class="xp__marker-initials">
+                  {job.company
+                    .split(' ')
+                    .slice(0, 2)
+                    .map((w) => w[0])
+                    .join('')}
+                </span>
+              )}
             </div>
 
             <div class="xp__content card">
@@ -100,6 +110,13 @@ import SectionHeader from './SectionHeader.astro';
     width: 1.9rem;
     height: 1.9rem;
     object-fit: contain;
+  }
+  .xp__marker-initials {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--accent-text);
+    letter-spacing: 0.02em;
   }
 
   .xp__content {

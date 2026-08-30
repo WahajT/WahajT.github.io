@@ -3,6 +3,7 @@
    precision that isn't real). `level` is a plain signal:
      'primary' → use daily, would be comfortable in an interview deep-dive
      'working' → productive with it, reach for it when a project needs it
+   Sourced from Wahaj's résumé (public/resume.pdf) + role details.
    ========================================================================= */
 
 import type { ImageMetadata } from 'astro';
@@ -17,7 +18,6 @@ import jenkins from '@/assets/tech/jenkins.svg';
 import docker from '@/assets/tech/docker.svg';
 import kubernetes from '@/assets/tech/kubernets.svg';
 import ansible from '@/assets/tech/ansible.svg';
-import aws from '@/assets/tech/AWS.svg';
 import python from '@/assets/tech/python.svg';
 import javascript from '@/assets/tech/javascript.svg';
 import bash from '@/assets/tech/bash.svg';
@@ -42,25 +42,31 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Test automation',
-    blurb: 'Framework design, flaky-test triage, cross-platform mobile + web coverage.',
+    blurb: 'Framework design, BDD, flaky-test triage, cross-platform mobile + web coverage.',
     skills: [
-      { name: 'Appium', icon: appium, level: 'primary' },
       { name: 'Selenium', icon: selenium, level: 'primary' },
+      { name: 'Appium', icon: appium, level: 'primary' },
+      { name: 'Playwright', level: 'primary' },
       { name: 'Cypress', icon: cypress, level: 'primary' },
-      { name: 'Robot Framework', icon: robot, level: 'working' },
+      { name: 'Cucumber / Gherkin', level: 'primary' },
       { name: 'Postman / REST', icon: postman, level: 'primary' },
+      { name: 'TestNG', level: 'working' },
+      { name: 'Pytest', level: 'working' },
+      { name: 'Robot Framework', icon: robot, level: 'working' },
     ],
   },
   {
     title: 'CI/CD & DevOps',
-    blurb: 'Pipeline design, parallelised test grids, containerised environments.',
+    blurb: 'Pipeline design, containerised test environments, agile delivery tooling.',
     skills: [
-      { name: 'GitLab CI', icon: gitlab, level: 'primary' },
-      { name: 'Jenkins', icon: jenkins, level: 'working' },
+      { name: 'Git', level: 'primary' },
+      { name: 'Jenkins', icon: jenkins, level: 'primary' },
       { name: 'Docker', icon: docker, level: 'primary' },
+      { name: 'Azure DevOps', level: 'primary' },
+      { name: 'Bitbucket Pipelines', level: 'working' },
+      { name: 'GitLab CI', icon: gitlab, level: 'working' },
       { name: 'Kubernetes', icon: kubernetes, level: 'working' },
       { name: 'Ansible', icon: ansible, level: 'working' },
-      { name: 'AWS', icon: aws, level: 'working' },
     ],
   },
   {
@@ -69,17 +75,33 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'Python', icon: python, level: 'primary' },
       { name: 'JavaScript', icon: javascript, level: 'primary' },
-      { name: 'Bash', icon: bash, level: 'working' },
+      { name: 'Java', level: 'primary' },
+      { name: 'C#', level: 'primary' },
+      { name: 'C / C++', level: 'working' },
       { name: 'Go', icon: go, level: 'working' },
+      { name: 'Bash', icon: bash, level: 'working' },
     ],
   },
   {
-    title: 'Data & reporting',
-    blurb: 'Turning test + device telemetry into something a team can act on.',
+    title: 'Data & ML',
+    blurb: 'Exploratory analysis and modelling from academic and internship work.',
     skills: [
-      { name: 'Jupyter', icon: jupyter, level: 'working' },
       { name: 'pandas', icon: pandas, level: 'working' },
+      { name: 'NumPy', level: 'working' },
+      { name: 'Matplotlib', level: 'working' },
       { name: 'scikit-learn', icon: sklearn, level: 'working' },
+      { name: 'Gradio', level: 'working' },
+      { name: 'Jupyter', icon: jupyter, level: 'working' },
+    ],
+  },
+  {
+    title: 'Platforms & tooling',
+    blurb: 'The rest of the day-to-day toolkit.',
+    skills: [
+      { name: 'Android / iOS', level: 'primary' },
+      { name: 'Jira', level: 'primary' },
+      { name: 'MySQL', level: 'working' },
+      { name: 'MongoDB', level: 'working' },
       { name: 'LaTeX', icon: latex, level: 'working' },
     ],
   },

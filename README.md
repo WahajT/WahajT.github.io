@@ -61,12 +61,15 @@ Search the repo for `TODO(wahaj)`. The important ones:
   header and footer; `logo-full.png` is the full lockup if you want it
   elsewhere. Replace with a crisper/transparent export (ideally SVG) when you
   have one.
-- **`src/data/experience.ts`** — every job title, date range and achievement
-  bullet is a reconstructed placeholder. Replace with real details; lead each
-  bullet with impact + a number.
-- **`src/content/projects/phonecheck.md` / `mobocheck.md`** — replace the
-  bracketed metrics and the `TODO` paragraphs with real figures and context.
-- **`public/resume.pdf`** — currently a 1-page placeholder. Drop in the real CV.
+- **`src/data/experience.ts` / `skills.ts`** — now populated from the résumé.
+  Add hard numbers to the achievement bullets where you have measured them
+  (only Selteq has one so far).
+- **`src/content/projects/phonecheck.md` / `mobocheck.md`** — narrative and
+  stack are aligned to the real roles; the `impact` bullets and a few context
+  lines are still `TODO`. Also confirm the PhoneCheck / Mobocheck framing
+  (product name vs client vs internal reference — see the comment in each file).
+- **`src/data/site.ts`** — `lookingFor` notice-period and work-eligibility rows
+  are guesses; confirm them.
 - **`src/data/testimonials.ts`** — add `url`s to the LinkedIn recommendations.
 
 ## Deployment

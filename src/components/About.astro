@@ -3,17 +3,17 @@ import { site } from '@/data/site';
 import SectionHeader from './SectionHeader.astro';
 import Icon from './Icon.astro';
 
-/* TODO(wahaj): rewrite these three points in your own voice. Keep them short
-   and concrete — what you do, the domain, and one thing you're known for. */
+/* TODO(wahaj): tweak the wording in your own voice — the facts below are
+   drawn straight from your résumé. */
 const points = [
-  'I work at the seam between QA and infrastructure: designing test-automation frameworks and the CI/CD that runs them, so teams get fast, trustworthy signal on every change.',
-  'Most of my work has been in mobile device diagnostics (PhoneCheck, Mobocheck) — driving real Android and iOS hardware from automated suites and keeping the pipelines that ship them healthy.',
-  'I care about flaky-test triage, reproducible environments, and reports a developer can actually act on. Comfortable owning a suite end-to-end, from device grid to merge-request gate.',
+  'I work at the seam between QA and delivery: designing test-automation frameworks and the CI/CD that runs them, so teams get fast, trustworthy signal on every change.',
+  'I started in mobile device diagnostics — driving real Android and iOS hardware from Python + Appium suites to tell genuine components from counterfeit — and now do the same for enterprise web products with C# and Playwright.',
+  'I care about BDD specs that non-engineers can read, reproducible Docker environments, and bug reports a developer can act on. Comfortable owning a suite end-to-end, from device grid to merge-request gate.',
 ];
 
 const facts = [
   { label: 'Focus', value: 'Test automation · CI/CD' },
-  { label: 'Domain', value: 'Mobile device diagnostics' },
+  { label: 'Domains', value: 'Mobile diagnostics · Enterprise web' },
   { label: 'Based in', value: site.location },
   { label: 'Working in', value: site.timezone },
 ];

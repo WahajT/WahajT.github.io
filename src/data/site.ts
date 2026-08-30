@@ -11,17 +11,16 @@ export const site = {
 
   name: 'Wahaj Tahir',
   /** Used in <title> suffix and JSON-LD jobTitle. */
-  role: 'SDET & DevOps Engineer',
+  role: 'SDET & Software Engineer',
 
   /** One line. Shown under the H1. Say what you do + the domain. */
   headline:
-    'I build test-automation frameworks and CI/CD pipelines for mobile device-diagnostics platforms.',
+    'I build test-automation frameworks and CI/CD pipelines — for mobile device diagnostics and enterprise web platforms.',
 
   /** 2–3 sentences for <meta name="description"> and social cards. ~150 chars is ideal. */
   description:
-    'Wahaj Tahir is an SDET and DevOps engineer specialising in mobile test automation (Appium, Selenium, Cypress) and CI/CD pipelines. See case studies from PhoneCheck and Mobocheck.',
+    'Wahaj Tahir is an SDET and software engineer specialising in test automation (Playwright, Selenium, Appium, Cypress) and CI/CD pipelines across mobile-diagnostics and enterprise web platforms.',
 
-  /** TODO(wahaj): confirm city / country. Used in JSON-LD + hero availability line. */
   location: 'Lahore, Pakistan',
   /** e.g. "Asia/Karachi" — shown near the contact section. */
   timezone: 'PKT (UTC+5)',
@@ -30,7 +29,7 @@ export const site = {
   availability: {
     open: true,
     // TODO(wahaj): tune wording to the exact roles you want.
-    label: 'Open to SDET / DevOps roles',
+    label: 'Open to SDET / SQA Automation roles',
     detail:
       'Available for full-time positions and long-term contracts — remote, or on-site in Lahore.',
   },
@@ -64,12 +63,12 @@ export const site = {
   /** "What I'm looking for" — pre-qualifies inbound and saves back-and-forth.
    *  TODO(wahaj): make every line accurate to your actual search. */
   lookingFor: [
-    { label: 'Roles', value: 'SDET · QA Automation · DevOps Engineer' },
-    { label: 'Level', value: 'Mid–Senior' },
+    { label: 'Roles', value: 'SDET · SQA Automation · Software Engineer in Test' },
+    { label: 'Level', value: 'Mid-level' },
     { label: 'Setup', value: 'Remote, or on-site in Lahore' },
-    { label: 'Stack', value: 'Appium · Selenium · Python · GitLab CI · Docker / K8s' },
-    { label: 'Notice period', value: '1 month' }, // TODO(wahaj)
-    { label: 'Work eligibility', value: 'Pakistan-based · open to relocation & sponsorship' }, // TODO(wahaj)
+    { label: 'Stack', value: 'Playwright · Selenium · Appium · Python · Java · C# · Docker · CI/CD' },
+    { label: 'Notice period', value: '1 month' }, // TODO(wahaj): confirm
+    { label: 'Work eligibility', value: 'Pakistan-based · open to relocation & sponsorship' }, // TODO(wahaj): confirm
   ],
 
   /** Reasons shown in the contact-form dropdown (helps you triage inbound). */
