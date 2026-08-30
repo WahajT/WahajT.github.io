@@ -59,6 +59,10 @@ video {
   height: auto;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 input,
 button,
 textarea,

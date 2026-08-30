@@ -53,6 +53,10 @@ Search the repo for `TODO(wahaj)`. The important ones:
   panel. Default is a placeholder; set `type: 'video'` (+ `src`, `poster`) or
   `type: 'image'` (+ `src`) and drop the file in `/public`. Aim for a 10–20s,
   &lt;5 MB, H.264 MP4.
+- **`src/data/site.ts` → `lookingFor` / `responseTime` / `contactReasons`** —
+  the "What I'm looking for" block and the contact form's reason dropdown.
+  Make every line in `lookingFor` accurate to your actual search (notice
+  period and work-eligibility rows are placeholders).
 - **Brand logo** — `src/assets/logo-mark.png` (WT monogram) is used in the
   header and footer; `logo-full.png` is the full lockup if you want it
   elsewhere. Replace with a crisper/transparent export (ideally SVG) when you

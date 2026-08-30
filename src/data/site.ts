@@ -58,6 +58,23 @@ export const site = {
 
   email: 'wahajtahir01@gmail.com',
 
+  /** Shown in the Contact section. Sets expectations, lowers friction to reach out. */
+  responseTime: 'I usually reply within 24 hours.',
+
+  /** "What I'm looking for" — pre-qualifies inbound and saves back-and-forth.
+   *  TODO(wahaj): make every line accurate to your actual search. */
+  lookingFor: [
+    { label: 'Roles', value: 'SDET · QA Automation · DevOps Engineer' },
+    { label: 'Level', value: 'Mid–Senior' },
+    { label: 'Setup', value: 'Remote, or on-site in Lahore' },
+    { label: 'Stack', value: 'Appium · Selenium · Python · GitLab CI · Docker / K8s' },
+    { label: 'Notice period', value: '1 month' }, // TODO(wahaj)
+    { label: 'Work eligibility', value: 'Pakistan-based · open to relocation & sponsorship' }, // TODO(wahaj)
+  ],
+
+  /** Reasons shown in the contact-form dropdown (helps you triage inbound). */
+  contactReasons: ['Job opportunity', 'Contract / freelance', 'Collaboration', 'Something else'],
+
   /** Path (in /public) to the résumé PDF. TODO(wahaj): drop the real file at public/resume.pdf */
   resume: '/resume.pdf',
 

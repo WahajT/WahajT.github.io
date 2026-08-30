@@ -23,9 +23,21 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
           site.availability.open
             ? site.availability.detail
             : 'Happy to chat about your team and what you’re building.'
-        } Fastest ways to reach me are below.`}
+        } ${site.responseTime}`}
         ghost={false}
       />
+
+      <dl class="contact__looking card" data-reveal>
+        <p class="contact__looking-h">What I'm looking for</p>
+        {
+          site.lookingFor.map((row) => (
+            <div>
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
 
       <ul class="contact__methods" role="list" data-reveal>
         <li>
@@ -50,54 +62,76 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
       </ul>
     </div>
 
-    <form
-      class="contact__form card"
-      data-reveal
-      method="POST"
-      action={hasForm ? 'https://api.web3forms.com/submit' : undefined}
-    >
-      {hasForm && <input type="hidden" name="access_key" value={site.web3formsKey} />}
-      <input type="hidden" name="subject" value={`Portfolio contact — ${site.name}`} />
-      {/* Honeypot — bots fill it, humans never see it. */}
-      <input
-        type="checkbox"
-        name="botcheck"
-        class="hp"
-        tabindex="-1"
-        autocomplete="off"
-        aria-hidden="true"
-      />
-      <div class="hp" aria-hidden="true">
-        <label for="cf-company">Company (leave blank)</label>
-        <input id="cf-company" type="text" name="company" tabindex="-1" autocomplete="off" />
-      </div>
+    <div class="contact__panel card" data-reveal>
+      <form
+        class="contact__form"
+        id="contact-form"
+        method="POST"
+        action={hasForm ? 'https://api.web3forms.com/submit' : undefined}
+      >
+        {hasForm && <input type="hidden" name="access_key" value={site.web3formsKey} />}
+        <input type="hidden" name="subject" value={`Portfolio contact — ${site.name}`} />
+        {/* Honeypot */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hp"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <div class="hp" aria-hidden="true">
+          <label for="cf-company">Company (leave blank)</label>
+          <input id="cf-company" type="text" name="company" tabindex="-1" autocomplete="off" />
+        </div>
 
-      <div class="field">
-        <label for="cf-name">Name</label>
-        <input id="cf-name" name="name" type="text" autocomplete="name" required />
-      </div>
-      <div class="field">
-        <label for="cf-email">Email</label>
-        <input id="cf-email" name="email" type="email" autocomplete="email" required />
-      </div>
-      <div class="field">
-        <label for="cf-msg">Message</label>
-        <textarea id="cf-msg" name="message" rows="5" required></textarea>
-      </div>
+        <div class="field field--row">
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
 
-      <button type="submit" class="btn">
-        Send message
-        <Icon name="arrowRight" />
-      </button>
+        <div class="field">
+          <label for="cf-reason">Reason for contact</label>
+          <div class="select-wrap">
+            <select id="cf-reason" name="reason">
+              {site.contactReasons.map((r) => <option value={r}>{r}</option>)}
+            </select>
+            <Icon name="arrowDown" />
+          </div>
+        </div>
 
-      <p class="contact__form-note" data-form-note aria-live="polite">
-        {
-          hasForm
-            ? 'Protected by a honeypot — no captcha, no tracking.'
-            : 'Form delivery isn’t configured yet — this button opens your email client. (Add a Web3Forms key in src/data/site.ts to enable it.)'
-        }
-      </p>
-    </form>
+        <div class="field">
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn">
+          Send message
+          <Icon name="arrowRight" />
+        </button>
+
+        <p class="contact__form-note" data-form-note aria-live="polite">
+          {
+            hasForm
+              ? 'Protected by a honeypot — no captcha, no tracking.'
+              : 'Form delivery isn’t configured yet — this button opens your email client. (Add a Web3Forms key in src/data/site.ts to enable it.)'
+          }
+        </p>
+      </form>
+
+      <div class="contact__success" data-form-success hidden>
+        <span class="contact__success-badge" aria-hidden="true"><Icon name="check" /></span>
+        <h3>Message sent.</h3>
+        <p>Thanks for reaching out — I’ll get back to you within a day.</p>
+        <button type="button" class="btn btn--ghost" data-form-reset>Send another</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -106,10 +140,56 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     display: grid;
     gap: clamp(2rem, 5vw, 3.5rem);
   }
-  @media (min-width: 860px) {
+  @media (min-width: 900px) {
     .contact {
       grid-template-columns: 1fr 1fr;
       align-items: start;
+    }
+  }
+
+  .contact__intro {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .contact__intro :global(.sec-head) {
+    margin-bottom: 0;
+    max-width: none;
+  }
+
+  /* --- What I'm looking for --- */
+  .contact__looking {
+    padding: clamp(1.25rem, 3vw, 1.6rem);
+    display: grid;
+    gap: 0.1rem;
+  }
+  .contact__looking-h {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-text);
+    margin-bottom: var(--space-sm);
+  }
+  .contact__looking > div {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .contact__looking dt {
+    font-size: var(--step--1);
+    color: var(--text-faint);
+  }
+  .contact__looking dd {
+    font-size: var(--step--1);
+    font-weight: 550;
+    color: var(--text);
+  }
+  @media (max-width: 460px) {
+    .contact__looking > div {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
     }
   }
 
@@ -141,14 +221,25 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     color: var(--text-faint);
   }
 
+  /* --- form panel --- */
+  .contact__panel {
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
   .contact__form {
     display: grid;
     gap: var(--space-md);
-    padding: clamp(1.5rem, 4vw, 2rem);
   }
   .field {
     display: grid;
     gap: 0.4rem;
+  }
+  .field--row {
+    gap: var(--space-md);
+  }
+  @media (min-width: 560px) {
+    .field--row {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .field label {
     font-family: var(--font-mono);
@@ -159,26 +250,49 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     color: var(--text-muted);
   }
   .field input,
-  .field textarea {
+  .field textarea,
+  .field select {
     padding: 0.7rem 0.85rem;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     background: var(--bg);
     color: var(--text);
     transition: border-color var(--dur-fast) var(--ease-out);
+    width: 100%;
   }
   .field input:hover,
-  .field textarea:hover {
+  .field textarea:hover,
+  .field select:hover {
     border-color: var(--text-faint);
   }
   .field input:focus-visible,
-  .field textarea:focus-visible {
+  .field textarea:focus-visible,
+  .field select:focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 1px;
   }
   .field textarea {
     resize: vertical;
     min-height: 6rem;
+  }
+  .select-wrap {
+    position: relative;
+    display: grid;
+  }
+  .select-wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.5rem;
+  }
+  .select-wrap :global(svg) {
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    color: var(--text-faint);
   }
   .hp {
     position: absolute;
@@ -191,61 +305,97 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     font-size: var(--step--1);
     color: var(--text-faint);
   }
-  .contact__form-note[data-state='ok'] {
-    color: #1a9c5b;
-  }
   .contact__form-note[data-state='error'] {
     color: #d1453b;
+  }
+
+  /* --- success state --- */
+  .contact__success {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+  }
+  .contact__success-badge {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, #1f9d55 16%, transparent);
+    color: #1f9d55;
+    margin-bottom: var(--space-xs);
+  }
+  .contact__success-badge :global(svg) {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .contact__success h3 {
+    font-size: var(--step-2);
+  }
+  .contact__success p {
+    color: var(--text-muted);
+  }
+  .contact__success .btn {
+    margin-top: var(--space-sm);
   }
 </style>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('.contact__form');
-  const note = document.querySelector<HTMLElement>('[data-form-note]');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      // No action attribute → fall back to a prefilled mailto:.
-      if (!form.getAttribute('action')) {
-        e.preventDefault();
-        const data = new FormData(form);
-        const body = `From: ${data.get('name')} <${data.get('email')}>\n\n${data.get('message')}`;
-        window.location.href = `mailto:wahajtahir01@gmail.com?subject=${encodeURIComponent(
-          'Portfolio contact',
-        )}&body=${encodeURIComponent(body)}`;
-        return;
-      }
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const panel = form?.closest('.contact__panel') as HTMLElement | null;
+  const success = panel?.querySelector('[data-form-success]') as HTMLElement | null;
+  const note = panel?.querySelector('[data-form-note]') as HTMLElement | null;
+  const resetBtn = panel?.querySelector('[data-form-reset]') as HTMLButtonElement | null;
 
+  const showSuccess = () => {
+    if (form) form.hidden = true;
+    if (success) success.hidden = false;
+  };
+  const showForm = () => {
+    if (success) success.hidden = true;
+    if (form) {
+      form.hidden = false;
+      form.reset();
+    }
+    if (note) note.removeAttribute('data-state');
+  };
+  resetBtn?.addEventListener('click', showForm);
+
+  form?.addEventListener('submit', async (e) => {
+    // No action → prefilled mailto: fallback.
+    if (!form.getAttribute('action')) {
       e.preventDefault();
-      if ((form.elements.namedItem('botcheck') as HTMLInputElement)?.checked) return;
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const btnHtml = btn.innerHTML;
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
-        });
-        if (res.ok) {
-          form.reset();
-          if (note) {
-            note.textContent = 'Thanks — your message is on its way. I’ll reply soon.';
-            note.dataset.state = 'ok';
-          }
-        } else {
-          throw new Error(String(res.status));
-        }
-      } catch {
-        if (note) {
-          note.textContent =
-            'Something went wrong. Please email wahajtahir01@gmail.com directly.';
-          note.dataset.state = 'error';
-        }
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = btnHtml;
+      const d = new FormData(form);
+      const body = `From: ${d.get('name')} <${d.get('email')}>\nReason: ${d.get('reason')}\n\n${d.get('message')}`;
+      window.location.href = `mailto:wahajtahir01@gmail.com?subject=${encodeURIComponent(
+        'Portfolio contact',
+      )}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
+    e.preventDefault();
+    if ((form.elements.namedItem('botcheck') as HTMLInputElement)?.checked) return;
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const label = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      showSuccess();
+    } catch {
+      if (note) {
+        note.textContent = 'Something went wrong. Please email wahajtahir01@gmail.com directly.';
+        note.dataset.state = 'error';
       }
-    });
-  }
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = label;
+    }
+  });
 </script>
