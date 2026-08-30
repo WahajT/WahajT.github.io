@@ -4,11 +4,12 @@ import SectionHeader from './SectionHeader.astro';
 import Icon from './Icon.astro';
 
 /* TODO(wahaj): tweak the wording in your own voice — the facts below are
-   drawn straight from your résumé. */
+   drawn straight from your résumé.
+   <mark> wraps the phrases that get the violet highlighter swipe. */
 const points = [
-  'I work at the seam between QA and delivery: designing test-automation frameworks and the CI/CD that runs them, so teams get fast, trustworthy signal on every change.',
-  'I started in mobile device diagnostics — driving real Android and iOS hardware from Python + Appium suites to tell genuine components from counterfeit — and now do the same for enterprise web products with C# and Playwright.',
-  'I care about BDD specs that non-engineers can read, reproducible Docker environments, and bug reports a developer can act on. Comfortable owning a suite end-to-end, from device grid to merge-request gate.',
+  'I work at the seam between QA and delivery: designing <mark>test-automation frameworks</mark> and the <mark>CI/CD</mark> that runs them, so teams get fast, trustworthy signal on every change.',
+  'I started in <mark>mobile device diagnostics</mark> — driving real Android and iOS hardware from Python + Appium suites to tell genuine components from counterfeit — and now do the same for enterprise web products with <mark>C# and Playwright</mark>.',
+  'I care about <mark>BDD specs</mark> that non-engineers can read, reproducible <mark>Docker environments</mark>, and bug reports a developer can act on. Comfortable owning a suite end-to-end, from device grid to merge-request gate.',
 ];
 
 const facts = [
@@ -71,7 +72,9 @@ const hasMedia = media.type === 'video' || media.type === 'image';
         </figure>
 
         <div class="about__points">
-          {points.map((p, i) => <p style={`--reveal-delay:${i * 60}ms`} data-reveal>{p}</p>)}
+          {points.map((p, i) => (
+            <p style={`--reveal-delay:${i * 60}ms`} data-reveal set:html={p} />
+          ))}
         </div>
       </div>
 
@@ -180,6 +183,21 @@ const hasMedia = media.type === 'video' || media.type === 'image';
     font-size: var(--step-1);
     color: var(--text-muted);
     max-width: var(--measure);
+  }
+  /* Violet highlighter swipe on key phrases. */
+  .about__points :global(mark) {
+    background: color-mix(in srgb, var(--brand) 15%, transparent);
+    color: var(--text);
+    padding: 0.05em 0.28em;
+    margin: 0 -0.04em;
+    border-radius: 4px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  @media (prefers-color-scheme: dark) {
+    .about__points :global(mark) {
+      background: color-mix(in srgb, var(--brand) 30%, transparent);
+    }
   }
 
   .about__facts {
