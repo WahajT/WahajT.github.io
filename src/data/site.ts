@@ -35,6 +35,27 @@ export const site = {
       'Available for full-time positions and long-term contracts — remote, or on-site in Lahore.',
   },
 
+  /** Company / personal brand shown in the header + footer next to the name. */
+  brand: {
+    name: 'WT Software Solutions',
+    /** Optional external link for the brand mark; '' = links to top of page. */
+    url: '',
+  },
+
+  /** Optional media panel in the About section (a short intro clip or a photo).
+   *  Drop the file in /public and point to it here.
+   *    type: 'video' → autoplay, muted, looping <video> (needs `poster`)
+   *    type: 'image' → a single <img>
+   *    type: 'none'  → a styled "drop your video here" placeholder (default)
+   *  Recommended: a 10–20s, <5 MB, 16:9 MP4 (H.264) + a poster frame. */
+  aboutMedia: {
+    type: 'none' as 'none' | 'video' | 'image',
+    src: '', // e.g. '/about.mp4' or '/about.jpg'
+    poster: '', // e.g. '/about-poster.jpg'  (video only)
+    alt: 'Wahaj Tahir at work',
+    caption: '', // optional short caption shown under the panel
+  },
+
   email: 'wahajtahir01@gmail.com',
 
   /** Path (in /public) to the résumé PDF. TODO(wahaj): drop the real file at public/resume.pdf */

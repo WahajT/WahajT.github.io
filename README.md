@@ -49,6 +49,14 @@ Search the repo for `TODO(wahaj)`. The important ones:
 - **`src/data/site.ts`** — confirm `location`, tune the `availability` wording,
   paste a **Web3Forms** access key (`web3formsKey`) to enable the contact form,
   add a Google Search Console token in `src/layouts/Base.astro`.
+- **`src/data/site.ts` → `aboutMedia`** — the About section has a 16:9 media
+  panel. Default is a placeholder; set `type: 'video'` (+ `src`, `poster`) or
+  `type: 'image'` (+ `src`) and drop the file in `/public`. Aim for a 10–20s,
+  &lt;5 MB, H.264 MP4.
+- **Brand logo** — `src/assets/logo-mark.png` (WT monogram) is used in the
+  header and footer; `logo-full.png` is the full lockup if you want it
+  elsewhere. Replace with a crisper/transparent export (ideally SVG) when you
+  have one.
 - **`src/data/experience.ts`** — every job title, date range and achievement
   bullet is a reconstructed placeholder. Replace with real details; lead each
   bullet with impact + a number.

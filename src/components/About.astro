@@ -1,6 +1,7 @@
 ---
 import { site } from '@/data/site';
 import SectionHeader from './SectionHeader.astro';
+import Icon from './Icon.astro';
 
 /* TODO(wahaj): rewrite these three points in your own voice. Keep them short
    and concrete — what you do, the domain, and one thing you're known for. */
@@ -16,6 +17,9 @@ const facts = [
   { label: 'Based in', value: site.location },
   { label: 'Working in', value: site.timezone },
 ];
+
+const media = site.aboutMedia;
+const hasMedia = media.type === 'video' || media.type === 'image';
 ---
 
 <section id="about" class="section">
@@ -27,8 +31,48 @@ const facts = [
     />
 
     <div class="about__grid">
-      <div class="about__points" data-reveal>
-        {points.map((p, i) => <p style={`--reveal-delay:${i * 60}ms`}>{p}</p>)}
+      <div class="about__col">
+        {/* --- Media panel: short intro clip or photo --- */}
+        <figure class="about__media" data-reveal data-state={media.type}>
+          {
+            media.type === 'video' && (
+              <video
+                class="about__media-el"
+                src={media.src}
+                poster={media.poster || undefined}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label={media.alt}
+              />
+            )
+          }
+          {
+            media.type === 'image' && (
+              <img class="about__media-el" src={media.src} alt={media.alt} loading="lazy" decoding="async" />
+            )
+          }
+          {
+            !hasMedia && (
+              <div class="about__media-placeholder">
+                <Icon name="arrowUpRight" />
+                <p>
+                  <strong>Intro video goes here.</strong>
+                  <br />
+                  Add an <code>mp4</code> to <code>/public</code> and set{' '}
+                  <code>aboutMedia</code> in <code>src/data/site.ts</code>.
+                </p>
+              </div>
+            )
+          }
+          {media.caption && <figcaption class="about__media-cap">{media.caption}</figcaption>}
+        </figure>
+
+        <div class="about__points">
+          {points.map((p, i) => <p style={`--reveal-delay:${i * 60}ms`} data-reveal>{p}</p>)}
+        </div>
       </div>
 
       <dl class="about__facts card" data-reveal>
@@ -50,11 +94,84 @@ const facts = [
     display: grid;
     gap: clamp(2rem, 5vw, 3.5rem);
   }
-  @media (min-width: 880px) {
+  @media (min-width: 900px) {
     .about__grid {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       align-items: start;
     }
+  }
+
+  .about__col {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  /* ---- media panel ---- */
+  .about__media {
+    position: relative;
+    margin: 0;
+  }
+  .about__media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    translate: 14px 14px;
+    border: 1px solid var(--brand);
+    border-radius: var(--radius-lg);
+    opacity: 0.5;
+    z-index: -1;
+  }
+  .about__media-el,
+  .about__media-placeholder {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    box-shadow: var(--shadow-md);
+  }
+  .about__media-el {
+    object-fit: cover;
+  }
+  .about__media-placeholder {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.75rem;
+    padding: var(--space-lg);
+    text-align: center;
+    color: var(--text-faint);
+    background:
+      radial-gradient(circle at 30% 25%, var(--accent-surface), transparent 60%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        color-mix(in srgb, var(--border) 55%, transparent) 10px,
+        color-mix(in srgb, var(--border) 55%, transparent) 11px
+      ),
+      var(--surface-2);
+  }
+  .about__media-placeholder :global(svg) {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--accent-text);
+  }
+  .about__media-placeholder p {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    max-width: 34ch;
+  }
+  .about__media-placeholder code {
+    color: var(--text-muted);
+  }
+  .about__media-cap {
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-faint);
   }
 
   .about__points {

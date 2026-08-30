@@ -1,12 +1,22 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '@/data/site';
 import Icon from './Icon.astro';
+import logoMark from '@/assets/logo-mark.png';
 ---
 
 <header class="site-header" id="site-header">
   <div class="container site-header__inner">
     <a href="#main" class="brand" aria-label={`${site.name} — home`}>
-      <span class="brand__mark" aria-hidden="true">WT</span>
+      <Image
+        src={logoMark}
+        alt={site.brand.name}
+        width={54}
+        height={28}
+        densities={[1, 2, 3]}
+        loading="eager"
+        class="brand__mark"
+      />
       <span class="brand__name">{site.name}</span>
     </a>
 
@@ -77,16 +87,14 @@ import Icon from './Icon.astro';
     letter-spacing: var(--tracking-snug);
   }
   .brand__mark {
-    display: grid;
-    place-items: center;
-    width: 2.1rem;
-    height: 2.1rem;
-    border-radius: var(--radius-sm);
-    background: var(--brand);
-    color: var(--brand-ink);
-    font-size: 0.78rem;
-    font-weight: 600;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    height: 1.65rem;
+    width: auto;
+  }
+  @media (prefers-color-scheme: dark) {
+    /* Lift the purple mark a touch against the near-black bar. */
+    .brand__mark {
+      filter: brightness(1.15) saturate(1.05);
+    }
   }
 
   .nav__list {

@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '@/data/site';
 import Icon from './Icon.astro';
+import logoMark from '@/assets/logo-mark.png';
 
 const year = new Date().getFullYear();
 const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
@@ -13,9 +15,20 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
 <footer class="site-footer">
   <div class="container">
     <div class="site-footer__top">
-      <div>
-        <p class="site-footer__name">{site.name}</p>
-        <p class="site-footer__role">{site.role} · {site.location}</p>
+      <div class="site-footer__id">
+        <Image
+          src={logoMark}
+          alt={site.brand.name}
+          width={72}
+          height={38}
+          densities={[1, 2]}
+          loading="lazy"
+          class="site-footer__mark"
+        />
+        <div>
+          <p class="site-footer__name">{site.name}</p>
+          <p class="site-footer__role">{site.role} · {site.location}</p>
+        </div>
       </div>
 
       <nav class="site-footer__links" aria-label="Social">
@@ -56,6 +69,20 @@ const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
     gap: var(--space-lg);
     align-items: center;
     justify-content: space-between;
+  }
+  .site-footer__id {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .site-footer__mark {
+    height: 2.4rem;
+    width: auto;
+  }
+  @media (prefers-color-scheme: dark) {
+    .site-footer__mark {
+      filter: brightness(1.15) saturate(1.05);
+    }
   }
   .site-footer__name {
     font-family: var(--font-display);
