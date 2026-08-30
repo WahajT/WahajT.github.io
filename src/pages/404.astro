@@ -1,0 +1,42 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+---
+
+<Base title="Page not found" noindex>
+  <section class="nf">
+    <div class="container">
+      <p class="nf__code">404</p>
+      <h1 class="nf__title">This page took a wrong turn.</h1>
+      <p class="nf__text">
+        The link may be old or mistyped. Everything lives on the home page.
+      </p>
+      <a href="/" class="btn">
+        Back to home
+        <Icon name="arrowRight" />
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: clamp(4rem, 14vw, 9rem);
+    text-align: center;
+  }
+  .nf__code {
+    font-size: var(--step-3);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: var(--tracking-caps);
+  }
+  .nf__title {
+    font-size: var(--step-4);
+    margin-top: var(--space-sm);
+  }
+  .nf__text {
+    margin: var(--space-md) auto var(--space-xl);
+    color: var(--text-muted);
+    max-width: 40ch;
+  }
+</style>

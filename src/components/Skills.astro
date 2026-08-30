@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import { skillGroups } from '@/data/skills';
+---
+
+<section id="skills" class="section" aria-labelledby="skills-title">
+  <div class="container">
+    <div class="skills__head" data-reveal>
+      <p class="eyebrow">Skills</p>
+      <h2 id="skills-title" class="section-title">The tools I reach for.</h2>
+      <p class="section-intro">
+        Grouped by what they're for. <strong>Primary</strong> means daily use and
+        interview-ready; <strong>working</strong> means productive when a project
+        calls for it.
+      </p>
+    </div>
+
+    <div class="skills__grid">
+      {
+        skillGroups.map((group, i) => (
+          <article class="skills__group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <h3 class="skills__group-title">{group.title}</h3>
+            <p class="skills__group-blurb">{group.blurb}</p>
+            <ul class="skills__list" role="list">
+              {group.skills.map((s) => (
+                <li class="skills__item" data-level={s.level}>
+                  {s.icon && (
+                    <Image
+                      src={s.icon}
+                      alt=""
+                      width={22}
+                      height={22}
+                      densities={[1, 2]}
+                      loading="lazy"
+                    />
+                  )}
+                  <span>{s.name}</span>
+                  {s.level === 'primary' && (
+                    <span class="skills__badge" title="Primary — daily use">
+                      ●
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__head {
+    margin-bottom: var(--space-2xl);
+  }
+  .skills__grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  }
+  .skills__group {
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .skills__group-title {
+    font-size: var(--step-1);
+  }
+  .skills__group-blurb {
+    margin-top: 0.4rem;
+    font-size: var(--step--1);
+    color: var(--text-faint);
+  }
+  .skills__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--space-md);
+  }
+  .skills__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg);
+  }
+  .skills__item[data-level='primary'] {
+    color: var(--text);
+    border-color: var(--accent-border);
+    background: var(--accent-surface);
+  }
+  .skills__item :global(img) {
+    width: 1.1rem;
+    height: 1.1rem;
+    object-fit: contain;
+  }
+  .skills__badge {
+    font-size: 0.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+</style>

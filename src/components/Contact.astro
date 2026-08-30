@@ -1,0 +1,241 @@
+---
+import { site } from '@/data/site';
+import Icon from './Icon.astro';
+import CopyEmail from './CopyEmail.astro';
+
+const hasForm = site.web3formsKey.length > 0;
+const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
+  github: 'github',
+  linkedin: 'linkedin',
+  mail: 'mail',
+};
+---
+
+<section id="contact" class="section section--tint" aria-labelledby="contact-title">
+  <div class="container contact">
+    <div class="contact__intro" data-reveal>
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title" class="section-title">Let's talk.</h2>
+      <p class="section-intro">
+        {site.availability.open ? site.availability.detail : 'Happy to chat about your team and what you’re building.'}
+        Fastest ways to reach me are below.
+      </p>
+
+      <ul class="contact__methods" role="list">
+        <li>
+          <a href={`mailto:${site.email}`}>
+            <Icon name="mail" />
+            {site.email}
+          </a>
+          <CopyEmail label="Copy" variant="ghost" />
+        </li>
+        {
+          site.socials
+            .filter((s) => s.icon !== 'mail')
+            .map((s) => (
+              <li>
+                <a href={s.url} target="_blank" rel="noopener noreferrer">
+                  <Icon name={iconFor[s.icon] ?? 'external'} />
+                  {s.handle}
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </div>
+
+    <form
+      class="contact__form"
+      data-reveal
+      method="POST"
+      action={hasForm ? 'https://api.web3forms.com/submit' : undefined}
+    >
+      {hasForm && <input type="hidden" name="access_key" value={site.web3formsKey} />}
+      <input type="hidden" name="subject" value={`Portfolio contact — ${site.name}`} />
+      {/* Honeypot — bots fill it, humans never see it. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hp"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+      <div class="hp" aria-hidden="true">
+        <label for="cf-company">Company (leave blank)</label>
+        <input id="cf-company" type="text" name="company" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="field">
+        <label for="cf-name">Name</label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="cf-email">Email</label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="cf-msg">Message</label>
+        <textarea id="cf-msg" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn">
+        Send message
+        <Icon name="arrowRight" />
+      </button>
+
+      <p class="contact__form-note" data-form-note aria-live="polite">
+        {
+          hasForm
+            ? 'Protected by a honeypot — no captcha, no tracking.'
+            : 'Form delivery isn’t configured yet — this button opens your email client. (Add a Web3Forms key in src/data/site.ts to enable it.)'
+        }
+      </p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+  @media (min-width: 860px) {
+    .contact {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .contact__methods {
+    display: grid;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+  }
+  .contact__methods li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  .contact__methods a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 550;
+  }
+  .contact__methods a:hover {
+    color: var(--accent);
+  }
+  .contact__methods :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--text-faint);
+  }
+
+  .contact__form {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .field {
+    display: grid;
+    gap: 0.35rem;
+  }
+  .field label {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .field input,
+  .field textarea {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+  .field input:focus-visible,
+  .field textarea:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 1px;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 6rem;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .contact__form-note {
+    font-size: var(--step--1);
+    color: var(--text-faint);
+  }
+  .contact__form-note[data-state='ok'] {
+    color: #1a9c5b;
+  }
+  .contact__form-note[data-state='error'] {
+    color: #d1453b;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.contact__form');
+  const note = document.querySelector<HTMLElement>('[data-form-note]');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      // No action attribute → fall back to a prefilled mailto:.
+      if (!form.getAttribute('action')) {
+        e.preventDefault();
+        const data = new FormData(form);
+        const body = `From: ${data.get('name')} <${data.get('email')}>\n\n${data.get('message')}`;
+        window.location.href = `mailto:wahajtahir01@gmail.com?subject=${encodeURIComponent(
+          'Portfolio contact',
+        )}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      e.preventDefault();
+      if ((form.elements.namedItem('botcheck') as HTMLInputElement)?.checked) return;
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const btnHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          if (note) {
+            note.textContent = 'Thanks — your message is on its way. I’ll reply soon.';
+            note.dataset.state = 'ok';
+          }
+        } else {
+          throw new Error(String(res.status));
+        }
+      } catch {
+        if (note) {
+          note.textContent =
+            'Something went wrong. Please email wahajtahir01@gmail.com directly.';
+          note.dataset.state = 'error';
+        }
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = btnHtml;
+      }
+    });
+  }
+</script>

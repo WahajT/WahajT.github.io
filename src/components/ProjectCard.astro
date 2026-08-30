@@ -1,0 +1,180 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { data, id } = project;
+const href = `/projects/${id}`;
+---
+
+<article class="pcard" data-stack={data.stack.join('|').toLowerCase()}>
+  <a class="pcard__media" href={href} tabindex="-1" aria-hidden="true">
+    <Image
+      src={data.cover}
+      alt={data.coverAlt}
+      width={640}
+      height={360}
+      widths={[360, 640, 900]}
+      sizes="(max-width: 720px) 92vw, 440px"
+      loading="lazy"
+      style={`object-fit:${data.coverFit}`}
+    />
+  </a>
+
+  <div class="pcard__body">
+    <p class="pcard__period">{data.role} · {data.period}</p>
+    <h3 class="pcard__title">
+      <a href={href}>{data.title}</a>
+    </h3>
+    <p class="pcard__summary">{data.summary}</p>
+
+    {
+      data.impact.length > 0 && (
+        <ul class="pcard__impact" role="list">
+          {data.impact.slice(0, 2).map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    <ul class="pcard__stack" role="list">
+      {data.stack.slice(0, 6).map((s) => <li class="chip">{s}</li>)}
+    </ul>
+
+    <div class="pcard__links">
+      <a class="pcard__cta" href={href}>
+        Read case study
+        <Icon name="arrowRight" />
+      </a>
+      {
+        data.links.map((l) => (
+          <a href={l.url} target="_blank" rel="noopener noreferrer" class="pcard__ext">
+            {l.label}
+            <Icon name="external" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    overflow: hidden;
+    transition:
+      border-color var(--dur-mid) var(--ease-out),
+      transform var(--dur-mid) var(--ease-out);
+  }
+  .pcard:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
+  }
+  .pcard__media {
+    display: block;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
+    padding: var(--space-lg);
+  }
+  .pcard__media :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+  .pcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+  }
+  .pcard__period {
+    font-size: var(--step--1);
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+  .pcard__title {
+    font-size: var(--step-2);
+  }
+  .pcard__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .pcard__title a:hover {
+    color: var(--accent);
+  }
+  .pcard__summary {
+    color: var(--text-muted);
+  }
+  .pcard__impact {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.2rem;
+  }
+  .pcard__impact li {
+    position: relative;
+    padding-left: 1.2rem;
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  .pcard__impact li::before {
+    content: '↗';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .pcard__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+  }
+  .pcard__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+  }
+  .pcard__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+  .pcard__cta :global(svg) {
+    width: 1rem;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .pcard__cta:hover :global(svg) {
+    transform: translateX(3px);
+  }
+  .pcard__ext {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .pcard__ext:hover {
+    color: var(--text);
+  }
+  .pcard__ext :global(svg) {
+    width: 0.9rem;
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+import { site } from '@/data/site';
+
+/* TODO(wahaj): rewrite these three points in your own voice. Keep them short
+   and concrete — what you do, the domain, and one thing you're known for. */
+const points = [
+  'I work at the seam between QA and infrastructure: designing test-automation frameworks and the CI/CD that runs them, so teams get fast, trustworthy signal on every change.',
+  'Most of my work has been in mobile device diagnostics (PhoneCheck, Mobocheck) — driving real Android and iOS hardware from automated suites and keeping the pipelines that ship them healthy.',
+  'I care about flaky-test triage, reproducible environments, and reports a developer can actually act on. Comfortable owning a suite end-to-end, from device grid to merge-request gate.',
+];
+
+const facts = [
+  { label: 'Focus', value: 'Test automation · CI/CD' },
+  { label: 'Domain', value: 'Mobile device diagnostics' },
+  { label: 'Based in', value: site.location },
+  { label: 'Working in', value: site.timezone },
+];
+---
+
+<section id="about" class="section" aria-labelledby="about-title">
+  <div class="container about">
+    <div class="about__aside" data-reveal>
+      <p class="eyebrow">About</p>
+      <h2 id="about-title" class="section-title">
+        SDET who treats the pipeline as part of the product.
+      </h2>
+
+      <dl class="about__facts">
+        {
+          facts.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="about__points">
+      {
+        points.map((p, i) => (
+          <p data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            {p}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+  @media (min-width: 880px) {
+    .about {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+
+  .about__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: var(--space-xl);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .about__facts > div {
+    background: var(--surface);
+    padding: var(--space-md) var(--space-lg);
+  }
+  .about__facts dt {
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-faint);
+  }
+  .about__facts dd {
+    margin-top: 0.25rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .about__points {
+    display: grid;
+    gap: var(--space-md);
+    font-size: var(--step-1);
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 880px) {
+    .about__points {
+      padding-top: 3.25rem;
+    }
+  }
+</style>

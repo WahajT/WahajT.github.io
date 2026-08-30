@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import Icon from './Icon.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Tech-filter chips only earn their place with enough projects to filter.
+const showFilter = projects.length >= 4;
+const allTags = [
+  ...new Set(projects.flatMap((p) => p.data.stack)),
+].sort();
+---
+
+<section id="projects" class="section section--tint" aria-labelledby="projects-title">
+  <div class="container">
+    <div class="fp__head" data-reveal>
+      <p class="eyebrow">Selected work</p>
+      <h2 id="projects-title" class="section-title">Projects, with the outcomes.</h2>
+      <p class="section-intro">
+        Each one links to a short case study — the problem, what I built, and what
+        changed as a result.
+      </p>
+    </div>
+
+    {
+      showFilter && (
+        <div class="fp__filter" role="group" aria-label="Filter projects by technology">
+          <button type="button" class="fp__chip is-active" data-filter="*">
+            All
+          </button>
+          {allTags.map((t) => (
+            <button type="button" class="fp__chip" data-filter={t.toLowerCase()}>
+              {t}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="fp__grid" data-reveal>
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    <p class="fp__more" data-reveal>
+      <a class="btn btn--ghost" href="https://github.com/WahajT" target="_blank" rel="noopener noreferrer">
+        <Icon name="github" />
+        More on GitHub
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .fp__head {
+    margin-bottom: var(--space-xl);
+  }
+  .fp__filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-xl);
+  }
+  .fp__chip {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+    font-weight: 550;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .fp__chip:hover {
+    color: var(--text);
+  }
+  .fp__chip.is-active {
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .fp__grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+  .fp__grid > [hidden] {
+    display: none;
+  }
+  .fp__more {
+    margin-top: var(--space-xl);
+  }
+</style>
+
+<script>
+  const filter = document.querySelector<HTMLElement>('.fp__filter');
+  if (filter) {
+    const chips = [...filter.querySelectorAll<HTMLButtonElement>('.fp__chip')];
+    const cards = [...document.querySelectorAll<HTMLElement>('.fp__grid .pcard')];
+    filter.addEventListener('click', (e) => {
+      const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('.fp__chip');
+      if (!chip) return;
+      chips.forEach((c) => c.classList.toggle('is-active', c === chip));
+      const want = chip.dataset.filter ?? '*';
+      cards.forEach((card) => {
+        const stack = card.dataset.stack ?? '';
+        card.hidden = want !== '*' && !stack.split('|').includes(want);
+      });
+    });
+  }
+</script>

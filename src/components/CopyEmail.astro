@@ -1,0 +1,86 @@
+---
+import { site } from '@/data/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'button' | 'ghost';
+  label?: string;
+}
+const { variant = 'ghost', label = 'Copy email' } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={['btn copy-email', variant === 'ghost' && 'btn--ghost']}
+  data-email={site.email}
+  data-label={label}
+>
+  <span class="copy-email__icon">
+    <span class="copy-email__copy"><Icon name="copy" /></span>
+    <span class="copy-email__check"><Icon name="check" /></span>
+  </span>
+  <span class="copy-email__text">{label}</span>
+</button>
+
+<style>
+  .copy-email__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 1.05em;
+    height: 1.05em;
+  }
+  .copy-email__icon > span {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+  .copy-email__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .copy-email__check {
+    display: none;
+    color: #1a9c5b;
+  }
+  .copy-email.is-copied .copy-email__copy {
+    display: none;
+  }
+  .copy-email.is-copied .copy-email__check {
+    display: grid;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy-email').forEach((btn) => {
+    const email = btn.dataset.email ?? '';
+    const label = btn.dataset.label ?? 'Copy email';
+    const text = btn.querySelector('.copy-email__text');
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        // Fallback for browsers without the async clipboard API.
+        const ta = document.createElement('textarea');
+        ta.value = email;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+        } catch {
+          window.location.href = `mailto:${email}`;
+          return;
+        }
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      if (text) text.textContent = 'Copied!';
+      window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        if (text) text.textContent = label;
+      }, 2000);
+    });
+  });
+</script>

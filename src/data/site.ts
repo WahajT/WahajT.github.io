@@ -1,0 +1,73 @@
+/* =========================================================================
+   Site-wide content & configuration.
+   This is the ONE file to edit for identity, headline, links and SEO
+   defaults. Everything marked TODO(wahaj) is a placeholder — replace with
+   real values before publishing.
+   ========================================================================= */
+
+export const site = {
+  /** Canonical origin — must match astro.config.mjs `site`. */
+  url: 'https://wahajt.github.io',
+
+  name: 'Wahaj Tahir',
+  /** Used in <title> suffix and JSON-LD jobTitle. */
+  role: 'SDET & DevOps Engineer',
+
+  /** One line. Shown under the H1. Say what you do + the domain. */
+  headline:
+    'I build test-automation frameworks and CI/CD pipelines for mobile device-diagnostics platforms.',
+
+  /** 2–3 sentences for <meta name="description"> and social cards. ~150 chars is ideal. */
+  description:
+    'Wahaj Tahir is an SDET and DevOps engineer specialising in mobile test automation (Appium, Selenium, Cypress) and CI/CD pipelines. See case studies from PhoneCheck and Mobocheck.',
+
+  /** TODO(wahaj): confirm city / country. Used in JSON-LD + hero availability line. */
+  location: 'Lahore, Pakistan',
+  /** e.g. "Asia/Karachi" — shown near the contact section. */
+  timezone: 'PKT (UTC+5)',
+
+  /** Availability banner. Set `open: false` to hide the "open to work" pill. */
+  availability: {
+    open: true,
+    // TODO(wahaj): tune wording to the exact roles you want.
+    label: 'Open to SDET / DevOps roles',
+    detail:
+      'Available for full-time positions and long-term contracts — remote, or on-site in Lahore.',
+  },
+
+  email: 'wahajtahir01@gmail.com',
+
+  /** Path (in /public) to the résumé PDF. TODO(wahaj): drop the real file at public/resume.pdf */
+  resume: '/resume.pdf',
+
+  /** Order here is the order shown in the header / footer. */
+  socials: [
+    { name: 'GitHub', handle: '@WahajT', url: 'https://github.com/WahajT', icon: 'github' },
+    {
+      name: 'LinkedIn',
+      handle: 'in/wahaj-tahir',
+      url: 'https://www.linkedin.com/in/wahaj-tahir',
+      icon: 'linkedin',
+    },
+    { name: 'Email', handle: 'wahajtahir01@gmail.com', url: 'mailto:wahajtahir01@gmail.com', icon: 'mail' },
+  ],
+
+  /** GitHub username used by the build-time stats fetch (src/lib/github.ts). */
+  githubUser: 'WahajT',
+
+  /** Contact form. Web3Forms is free, static-friendly and needs no backend.
+   *  1. Create an access key at https://web3forms.com (takes 30s, no account).
+   *  2. Paste it below. Until then the form falls back to a mailto: link. */
+  web3formsKey: '', // TODO(wahaj): paste Web3Forms access key
+
+  /** Nav sections — id must match a section id in index.astro */
+  nav: [
+    { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Contact', href: '#contact' },
+  ],
+} as const;
+
+export type Site = typeof site;

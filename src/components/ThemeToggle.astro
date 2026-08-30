@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label="Switch between light and dark theme"
+  title="Toggle theme"
+>
+  <span class="theme-toggle__sun"><Icon name="sun" /></span>
+  <span class="theme-toggle__moon"><Icon name="moon" /></span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-muted);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--text-faint);
+  }
+  .theme-toggle span {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+  .theme-toggle :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  /* Default (system) — show the icon for the mode you would switch TO. */
+  .theme-toggle__moon {
+    display: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .theme-toggle__sun {
+      display: none;
+    }
+    .theme-toggle__moon {
+      display: grid;
+    }
+  }
+  /* Explicit override wins over the media query in both directions. */
+  :global(:root[data-theme='light']) .theme-toggle__sun {
+    display: grid;
+  }
+  :global(:root[data-theme='light']) .theme-toggle__moon {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle__sun {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle__moon {
+    display: grid;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  function current(): 'light' | 'dark' {
+    const set = root.getAttribute('data-theme');
+    if (set === 'light' || set === 'dark') return set;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  btn?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* private mode — ignore */
+    }
+  });
+</script>

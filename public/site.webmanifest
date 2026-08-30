@@ -1,0 +1,13 @@
+{
+  "name": "Wahaj Tahir — SDET & DevOps Engineer",
+  "short_name": "Wahaj Tahir",
+  "description": "Portfolio of Wahaj Tahir, an SDET and DevOps engineer specialising in mobile test automation and CI/CD.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

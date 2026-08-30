@@ -1,0 +1,181 @@
+---
+import { Image } from 'astro:assets';
+import { experience } from '@/data/experience';
+---
+
+<section id="experience" class="section section--tint" aria-labelledby="experience-title">
+  <div class="container">
+    <div class="xp__head" data-reveal>
+      <p class="eyebrow">Experience</p>
+      <h2 id="experience-title" class="section-title">Where I've done the work.</h2>
+      <p class="section-intro">
+        Six years across QA and platform teams, moving from manual testing into
+        automation ownership and delivery pipelines.
+      </p>
+    </div>
+
+    <ol class="xp" role="list">
+      {
+        experience.map((job, i) => (
+          <li class="xp__item" data-reveal style={`--reveal-delay:${Math.min(i, 4) * 60}ms`}>
+            <div class="xp__marker" aria-hidden="true">
+              <Image
+                src={job.logo}
+                alt=""
+                width={40}
+                height={40}
+                densities={[1, 2]}
+                loading="lazy"
+              />
+            </div>
+
+            <div class="xp__content">
+              <div class="xp__meta">
+                <h3 class="xp__role">{job.title}</h3>
+                <p class="xp__company">
+                  {job.url ? (
+                    <a href={job.url} target="_blank" rel="noopener noreferrer">
+                      {job.company}
+                    </a>
+                  ) : (
+                    job.company
+                  )}
+                  {job.location && <span class="xp__loc"> · {job.location}</span>}
+                </p>
+                <p class="xp__dates">
+                  {job.start} — {job.end}
+                </p>
+              </div>
+
+              <p class="xp__summary">{job.summary}</p>
+
+              {job.highlights.length > 0 && (
+                <ul class="xp__highlights" role="list">
+                  {job.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              )}
+
+              {job.stack.length > 0 && (
+                <ul class="xp__stack" role="list">
+                  {job.stack.map((s) => (
+                    <li class="chip">{s}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .xp__head {
+    margin-bottom: var(--space-2xl);
+  }
+  .xp {
+    display: grid;
+    gap: 0;
+  }
+  .xp__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-2xl);
+    position: relative;
+  }
+  .xp__item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 3.4rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-strong);
+  }
+
+  .xp__marker {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .xp__marker :global(img) {
+    width: 1.75rem;
+    height: 1.75rem;
+    object-fit: contain;
+  }
+
+  .xp__role {
+    font-size: var(--step-1);
+  }
+  .xp__company {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .xp__company a {
+    color: inherit;
+  }
+  .xp__loc {
+    font-weight: 400;
+    color: var(--text-faint);
+  }
+  .xp__dates {
+    font-size: var(--step--1);
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    margin-top: 0.1rem;
+  }
+  .xp__summary {
+    margin-top: var(--space-sm);
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+  .xp__highlights {
+    margin-top: var(--space-sm);
+    display: grid;
+    gap: 0.4rem;
+    max-width: var(--measure);
+  }
+  .xp__highlights li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--text-muted);
+  }
+  .xp__highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .xp__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--space-md);
+  }
+
+  @media (max-width: 560px) {
+    .xp__item {
+      grid-template-columns: 1fr;
+    }
+    .xp__item::before {
+      display: none;
+    }
+    .xp__marker {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>

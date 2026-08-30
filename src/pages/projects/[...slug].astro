@@ -1,0 +1,249 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+import { site } from '@/data/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: data.title,
+  abstract: data.summary,
+  creator: { '@type': 'Person', name: site.name, url: site.url },
+  keywords: data.stack.join(', '),
+  url: new URL(`/projects/${project.id}`, site.url).href,
+};
+---
+
+<Base
+  title={data.title}
+  description={data.summary}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <article class="project">
+    <div class="container container--narrow">
+      <a href="/#projects" class="project__back">
+        <span class="project__back-icon"><Icon name="arrowRight" /></span>
+        All projects
+      </a>
+
+      <header class="project__header">
+        <p class="project__meta">{data.role} · {data.period}</p>
+        <h1 class="project__title">{data.title}</h1>
+        <p class="project__summary">{data.summary}</p>
+
+        <ul class="project__stack" role="list">
+          {data.stack.map((s) => <li class="chip">{s}</li>)}
+        </ul>
+
+        {
+          data.links.length > 0 && (
+            <div class="project__links">
+              {data.links.map((l) => (
+                <a href={l.url} target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+                  {l.label}
+                  <Icon name="external" />
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </header>
+
+      <Image
+        src={data.cover}
+        alt={data.coverAlt}
+        width={900}
+        height={506}
+        widths={[480, 900, 1200]}
+        sizes="(max-width: 780px) 92vw, 720px"
+        class="project__cover"
+        style={`object-fit:${data.coverFit}`}
+        loading="eager"
+      />
+
+      {
+        data.impact.length > 0 && (
+          <ul class="project__impact" role="list">
+            {data.impact.map((point) => (
+              <li>
+                <Icon name="arrowUpRight" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      <div class="project__body">
+        <Content />
+      </div>
+
+      <footer class="project__footer">
+        <a href="/#contact" class="btn">
+          Work with me
+          <Icon name="arrowRight" />
+        </a>
+        <a href="/#projects" class="btn btn--ghost">Back to all projects</a>
+      </footer>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .container--narrow {
+    max-width: var(--container-narrow);
+  }
+  .project {
+    padding-block: clamp(2rem, 6vw, 4rem) var(--space-3xl);
+  }
+  .project__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+  .project__back:hover {
+    color: var(--text);
+  }
+  .project__back-icon {
+    display: inline-grid;
+    transform: rotate(180deg);
+  }
+  .project__back-icon :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .project__header {
+    margin-top: var(--space-xl);
+  }
+  .project__meta {
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-faint);
+  }
+  .project__title {
+    font-size: var(--step-4);
+    margin-top: var(--space-xs);
+  }
+  .project__summary {
+    margin-top: var(--space-md);
+    font-size: var(--step-1);
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+  .project__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--space-lg);
+  }
+  .project__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+  }
+
+  .project__cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: var(--space-2xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-subtle);
+    padding: var(--space-xl);
+  }
+
+  .project__impact {
+    display: grid;
+    gap: var(--space-xs);
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--accent-border);
+    background: var(--accent-surface);
+    border-radius: var(--radius-lg);
+  }
+  .project__impact li {
+    display: flex;
+    gap: 0.6rem;
+    color: var(--text);
+  }
+  .project__impact :global(svg) {
+    flex: none;
+    width: 1.1rem;
+    margin-top: 0.25rem;
+    color: var(--accent);
+  }
+
+  .project__body {
+    margin-top: var(--space-2xl);
+    font-size: var(--step-0);
+    color: var(--text);
+  }
+  .project__body :global(h2) {
+    font-size: var(--step-2);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-sm);
+  }
+  .project__body :global(h3) {
+    font-size: var(--step-1);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xs);
+  }
+  .project__body :global(p) {
+    margin-block: var(--space-md);
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+  .project__body :global(ul) {
+    margin-block: var(--space-md);
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.4rem;
+    color: var(--text-muted);
+  }
+  .project__body :global(blockquote) {
+    margin-block: var(--space-lg);
+    padding-left: var(--space-md);
+    border-left: 3px solid var(--accent-border);
+    color: var(--text-faint);
+    font-style: italic;
+  }
+  .project__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--bg-subtle);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+
+  .project__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+  }
+</style>

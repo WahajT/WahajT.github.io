@@ -1,0 +1,140 @@
+/* =========================================================================
+   Design tokens — single source of truth for colour, type, space, motion.
+   Light palette lives on bare :root. Dark overrides are applied both from
+   the system preference and from an explicit [data-theme] set by the toggle.
+   ========================================================================= */
+
+:root {
+  /* ---- Palette (light) ---- */
+  --bg: #ffffff;
+  --bg-subtle: #f6f6f8;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --border: #e6e6ea;
+  --border-strong: #d3d3da;
+
+  --text: #17171c;
+  --text-muted: #55555f;
+  --text-faint: #7a7a85;
+
+  --accent: #6d28d9;          /* violet-700 — 6.9:1 on white */
+  --accent-hover: #5b21b6;
+  --accent-contrast: #ffffff; /* text on top of --accent fills */
+  --accent-surface: #f3effe;  /* faint accent wash for chips */
+  --accent-border: #d9ccfb;
+
+  --focus-ring: #6d28d9;
+  --selection: #e5dbff;
+
+  /* ---- Type ---- */
+  --font-sans: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  /* Fluid type scale (min 320px → max 1200px viewport) */
+  --step--1: clamp(0.83rem, 0.79rem + 0.20vw, 0.94rem);
+  --step-0: clamp(0.95rem, 0.90rem + 0.25vw, 1.08rem);
+  --step-1: clamp(1.14rem, 1.05rem + 0.44vw, 1.44rem);
+  --step-2: clamp(1.37rem, 1.22rem + 0.75vw, 1.92rem);
+  --step-3: clamp(1.64rem, 1.40rem + 1.20vw, 2.57rem);
+  --step-4: clamp(1.97rem, 1.59rem + 1.90vw, 3.43rem);
+  --step-5: clamp(2.36rem, 1.78rem + 2.90vw, 4.57rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.65;
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.02em;
+  --tracking-caps: 0.12em;
+
+  /* ---- Space scale ---- */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  /* ---- Layout ---- */
+  --measure: 65ch;
+  --container: 68rem;
+  --container-narrow: 46rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.06);
+  --shadow-md: 0 4px 20px -6px rgba(20, 20, 30, 0.12);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-mid: 240ms;
+  --dur-slow: 420ms;
+
+  --header-h: 4rem;
+  color-scheme: light;
+}
+
+/* -------- Dark palette (system preference) -------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0b0b0f;
+    --bg-subtle: #101016;
+    --bg-elevated: #16161d;
+    --surface: #14141b;
+    --border: #26262f;
+    --border-strong: #35353f;
+
+    --text: #ececf0;
+    --text-muted: #a6a6b2;
+    --text-faint: #7c7c88;
+
+    --accent: #a78bfa;          /* violet-300 — 7.4:1 on #0b0b0f */
+    --accent-hover: #c4b5fd;
+    --accent-contrast: #14101f;
+    --accent-surface: #1b1630;
+    --accent-border: #362a5c;
+
+    --focus-ring: #a78bfa;
+    --selection: #2c2350;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 30px -10px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* -------- Dark palette (explicit toggle) -------- */
+:root[data-theme='dark'] {
+  --bg: #0b0b0f;
+  --bg-subtle: #101016;
+  --bg-elevated: #16161d;
+  --surface: #14141b;
+  --border: #26262f;
+  --border-strong: #35353f;
+
+  --text: #ececf0;
+  --text-muted: #a6a6b2;
+  --text-faint: #7c7c88;
+
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --accent-contrast: #14101f;
+  --accent-surface: #1b1630;
+  --accent-border: #362a5c;
+
+  --focus-ring: #a78bfa;
+  --selection: #2c2350;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 30px -10px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}

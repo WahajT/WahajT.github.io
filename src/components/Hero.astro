@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '@/data/site';
+import Icon from './Icon.astro';
+import CopyEmail from './CopyEmail.astro';
+import profile from '@/assets/profile.webp';
+
+const iconFor: Record<string, 'github' | 'linkedin' | 'mail'> = {
+  github: 'github',
+  linkedin: 'linkedin',
+  mail: 'mail',
+};
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__body">
+      {
+        site.availability.open && (
+          <p class="hero__status">
+            <span class="hero__status-dot" aria-hidden="true" />
+            {site.availability.label}
+          </p>
+        )
+      }
+
+      <h1 id="hero-title" class="hero__title">
+        {site.name}
+        <span class="hero__role">{site.role}</span>
+      </h1>
+
+      <p class="hero__headline">{site.headline}</p>
+
+      <div class="hero__cta">
+        <a class="btn" href="#projects">
+          View projects
+          <Icon name="arrowDown" />
+        </a>
+        <a class="btn btn--ghost" href={site.resume} download>
+          <Icon name="download" />
+          Download résumé
+        </a>
+        <CopyEmail label="Copy email" />
+      </div>
+
+      <ul class="hero__socials" role="list">
+        {
+          site.socials.map((s) => (
+            <li>
+              <a
+                href={s.url}
+                target={s.url.startsWith('http') ? '_blank' : undefined}
+                rel={s.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                <Icon name={iconFor[s.icon] ?? 'external'} />
+                <span>{s.handle}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero__portrait">
+      <Image
+        src={profile}
+        alt={`Portrait of ${site.name}`}
+        width={420}
+        height={520}
+        widths={[280, 420, 640, 840]}
+        sizes="(max-width: 900px) 60vw, 360px"
+        formats={['avif', 'webp']}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <p class="hero__portrait-tag">
+        <Icon name="pin" />
+        {site.location} · {site.timezone}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 8vw, 6rem) clamp(2.5rem, 7vw, 5rem);
+  }
+  .hero__grid {
+    display: grid;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1.4fr 0.9fr;
+    }
+  }
+
+  .hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--accent-border);
+    background: var(--accent-surface);
+    border-radius: var(--radius-full);
+    font-size: var(--step--1);
+    font-weight: 550;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+  .hero__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a9c5b;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #1a9c5b 25%, transparent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__status-dot {
+      animation: pulse 2.4s var(--ease-out) infinite;
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px color-mix(in srgb, #1a9c5b 25%, transparent);
+      }
+      50% {
+        box-shadow: 0 0 0 6px color-mix(in srgb, #1a9c5b 0%, transparent);
+      }
+    }
+  }
+
+  .hero__title {
+    font-size: var(--step-5);
+    line-height: 1.05;
+  }
+  .hero__role {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: var(--step-2);
+    font-weight: 550;
+    color: var(--accent);
+    letter-spacing: var(--tracking-tight);
+  }
+  .hero__headline {
+    margin-top: var(--space-lg);
+    max-width: 46ch;
+    font-size: var(--step-1);
+    color: var(--text-muted);
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xl);
+  }
+
+  .hero__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .hero__socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: var(--step--1);
+  }
+  .hero__socials a:hover {
+    color: var(--text);
+  }
+  .hero__socials :global(svg) {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .hero__portrait {
+    justify-self: center;
+  }
+  .hero__portrait :global(img) {
+    width: min(360px, 70vw);
+    height: auto;
+    aspect-ratio: 42 / 52;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+  }
+  .hero__portrait-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: var(--space-sm);
+    color: var(--text-faint);
+    font-size: var(--step--1);
+  }
+  .hero__portrait-tag :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+  @media (max-width: 899px) {
+    .hero__portrait {
+      justify-self: start;
+    }
+    .hero__portrait :global(img) {
+      width: min(260px, 55vw);
+    }
+  }
+</style>
